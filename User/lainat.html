@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Lainat</title>
+    <link href="css/kayttoliittyma.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+<!-- Navigaatio -->
+<ul>
+    <li><a href="http://localhost:63342/Kirjasto/kirjahaku.html?_ijt=cn6o9h31bj8d9a68uf16aakr36">Kirjahaku</a></li>
+    <li><a href="http://localhost:63342/Kirjasto/lainahaku.html?_ijt=n94kj24ntaqeqk02bb72cmvkuq">Lainahaku</a></li>
+    <li><a class="active" href="http://localhost:63342/Kirjasto/lainat.html?_ijt=h39qlj9l2r4nfvnsqhlbpo0c7c">Lainat</a></li>
+    <li><a href="http://localhost:63342/Kirjasto/kokoelma.html?_ijt=jbb9afvm3bmvn0ns083pah20vv">Kokoelma</a></li>
+</ul>
+
+<select id="select_language" onchange="new_language()">
+    <option value="ENG">ENGLISH</option>
+    <option value="JPN">日本語</option>
+    <option value="RUS">РУССКИЙ</option>
+    <option value="FIN" selected>SUOMI</option>
+    <option value="SWE">SVENSKA</option>
+</select>
+
+<h1>Lainat</h1>
+
+<!-- Lomake -->
+<form lang="fi" action="">
+    <div>
+        <fieldset>
+            <legend>Laina</legend>
+            <div>
+                Teoksen ID:<br> <input type="text" name="id" placeholder=" ID (3 dig)"
+                                   pattern="[0-9]{3}"
+                                   oninvalid="this.setCustomValidity('Invalid ID id')"/>
+            </div>
+            <div>
+                Asiakkaan etunimi:<br> <input type="text" name="etunimi" placeholder=" Etunimi"/>
+            </div>
+            <div>
+                Asiakkaan sukunimi:<br> <input type="text" name="sukunimi" placeholder=" Sukunimi"/>
+            </div>
+            <div>
+                Eräpäivä:<br> <input type="date" name="erapaiva" placeholder=" DD.MM.YYYY"
+            pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"/>
+            </div>
+            <div>
+                <input class="nappi" type="submit" />
+            </div>
+        </fieldset>
+    </div>
+</form>
+
+<form lang="fi" action="">
+    <div>
+        <fieldset>
+            <legend>Palauta</legend>
+            <div>
+                Teoksen ID:<br> <input type="text" name="id" placeholder=" ID (3 dig)"
+                                   pattern="[0-9]{3}"
+                                   oninvalid="this.setCustomValidity('Invalid ID id')"/>
+            </div>
+            <div>
+                <input class="nappi" type="submit" />
+            </div>
+        </fieldset>
+    </div>
+</form>
+
+
+</body>
+</html>
