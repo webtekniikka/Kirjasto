@@ -1,0 +1,59 @@
+/*kentät ja napit*/
+input[type="text"] {
+    color : blue;
+}
+
+input[type="number"] {
+    color: blue;
+}
+
+input[type="submit"] {
+    font-weight : bold;
+}
+
+div{
+    margin-bottom: 1em;
+}
+
+p{
+    margin-bottom: 0px;
+}
+.nappi{
+    margin-bottom: 1em;
+}
+
+/*taustaväri*/
+body{
+    background-color: yellow;
+}
+
+/*navigaatio*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ff8000;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    font-size: 20px;
+    font-weight : bold;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #0000ff;
+}
+
+.active {
+    background-color: #33cc33;
+}
