@@ -70,3 +70,38 @@ function new_language() {
         document.getElementById("demo").innerHTML = "God dag!";
     }
 }
+
+function kirjahaku(){
+
+    // Luodaan url
+    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+
+    let nimi = document.getElementsByName("nimi")[0].value;
+        url += "nimi="+nimi;
+        let knimi = document.getElementsByName("knimi")[0].value;
+        url += "&knimi=" + knimi;
+        let id = document.getElementsByName("id")[0].value;
+        url += "&id=" + id;
+        let kieli = document.getElementsByName("kieli")[0].value;
+        url += "&kieli="+kieli;
+        let isbn = document.getElementsByName("isbn")[0].value;
+        url += "&isbn="+isbn;
+        let vuodesta = document.getElementsByName("vuodesta")[0].value;
+        url += "&vuodesta="+vuodesta;
+        let vuoteen = document.getElementsByName("vuoteen")[0].value;
+        url += "&vuoteen="+vuoteen;
+
+
+
+    // tehdään XMLrequest ja lähetetään se
+    let xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function(){
+        if (xml.readyState == 4 && xml.status == 200) {
+            document.getElementById("hakutulos").innerHTML = xml.responseText;
+        }
+    };
+    xml.open("GET", url, true);
+    xml.send();
+
+}
