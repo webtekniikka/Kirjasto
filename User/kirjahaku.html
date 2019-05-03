@@ -5,6 +5,10 @@
     <meta charset="utf-8"/>
     <title>Kirjahaku</title>
     <link href="css/kayttoliittyma.css" type="text/css" rel="stylesheet" />
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -16,18 +20,18 @@
     <li><a id="iv" href="kokoelma.html">Kokoelma</a></li>
 </ul>
 
-<select id="select_language" onchange="new_language()">
+<select id="select_language" onclick="new_language()">
     <option value="ENG">ENGLISH</option>
     <option value="JPN">日本語</option>
     <option value="RUS">РУССКИЙ</option>
-    <option value="FIN" selected>SUOMI</option>
+    <option value="FIN">SUOMI</option>
     <option value="SWE">SVENSKA</option>
 </select>
 
 <h1 id="1">Kirjahaku</h1>
 
 <!-- Lomake -->
-<form  lang="fi" action="">
+<form lang="fi" action="">
     <div>
         <fieldset>
             <legend id="2">Hae kirja</legend>
@@ -46,7 +50,7 @@
                 <p id="6">Teoksen kieli:</p> <input type="text" name="kieli" placeholder=" Kieli"/>
             </div>
             <div>
-                <p id="7">Teoksen ISBN:</p>  <input type="text" name="isbn" placeholder=" ISBN (13 dig)"
+                <p id="7">Teoksen ISBN:</p> <input type="text" name="isbn" placeholder=" ISBN (13 dig)"
                                      pattern="[0-9]{13}"
                                      oninvalid="this.setCustomValidity('Invalid ISBN')"/>
             </div>
@@ -56,7 +60,7 @@
                                  oninvalid="this.setCustomValidity('Invalid year')"/>
             </div>
             <div>
-                <p id="9">Vuoteen:</p>  <input type="number" name="vuoteen" placeholder=" Vuosi (4 dig)"
+                <p id="9">Vuoteen:</p> <input type="number" name="vuoteen" placeholder=" Vuosi (4 dig)"
                                 pattern="[0-9]{4}"
                                 oninvalid="this.setCustomValidity('Invalid year')"/>
             </div>
