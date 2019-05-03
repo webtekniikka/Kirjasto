@@ -5,73 +5,77 @@
     <meta charset="utf-8"/>
     <title>Lainahaku</title>
     <link href="css/kayttoliittyma.css" type="text/css" rel="stylesheet" />
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body>
 <!-- Navigaatio -->
 <ul>
-    <li><a href="kirjahaku.html">Kirjahaku</a></li>
-    <li><a class="active" href="lainahaku.html">Lainahaku</a></li>
-    <li><a href="lainat.html">Lainat</a></li>
-    <li><a href="kokoelma.html">Kokoelma</a></li>
+    <li><a id="i" href="kirjahaku.html">Kirjahaku</a></li>
+    <li><a id="ii" class="active" href="lainahaku.html">Lainahaku</a></li>
+    <li><a id="iii" href="lainat.html">Lainat</a></li>
+    <li><a id="iv" href="kokoelma.html">Kokoelma</a></li>
 </ul>
 
-<select id="select_language" onchange="new_language()">
+<select id="select_language" onclick="new_language()">
     <option value="ENG">ENGLISH</option>
     <option value="JPN">日本語</option>
     <option value="RUS">РУССКИЙ</option>
-    <option value="FIN" selected>SUOMI</option>
+    <option value="FIN">SUOMI</option>
     <option value="SWE">SVENSKA</option>
 </select>
 
-<h1>Lainahaku</h1>
+<h1 id="1">Lainahaku</h1>
 
 <!-- Lomake -->
-<form  lang="fi" action="">
+<form lang="fi" action="">
     <div>
         <fieldset>
-            <legend>Lainahaku</legend>
+            <legend id="2">Lainahaku</legend>
             <div>
-                Teoksen nimi:<br> <input type="text" name="nimi" placeholder="Teoksen nimi"/>
+                <p id="3">Teoksen nimi:</p> <input type="text" name="nimi" placeholder="Teoksen nimi"/>
             </div>
             <div>
-                Kirjailijan nimi:<br> <input type="text" name="knimi" placeholder=" Kirjailijan nimi"/>
+                <p id="4">Kirjailijan nimi:</p> <input type="text" name="knimi" placeholder=" Kirjailijan nimi"/>
             </div>
             <div>
-                Teoksen ID:<br> <input type="text" name="id" placeholder=" ID (3 dig)"
+                <p id="5">Teoksen ID:</p> <input type="text" name="id" placeholder=" ID (3 dig)"
                                    pattern="[0-9]{3}"
                                    oninvalid="this.setCustomValidity('Invalid ID id')"/>
             </div>
             <div>
-                Teoksen kieli:<br> <input type="text" name="kieli" placeholder=" Kieli"/>
+                <p id="6">Teoksen kieli:</p> <input type="text" name="kieli" placeholder=" Kieli"/>
             </div>
             <div>
-                Teoksen ISBN:<br> <input type="text" name="isbn" placeholder=" ISBN (13 dig)"
+                <p id="7">Teoksen ISBN:</p> <input type="text" name="isbn" placeholder=" ISBN (13 dig)"
                                      pattern="[0-9]{13}"
                                      oninvalid="this.setCustomValidity('Invalid ISBN')"/>
             </div>
             <div>
-                Eräpäivä:<br> <input type="date" name="erapaiva" placeholder=" DD.MM.YYYY"
-                                 pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"/>
-            </div>
-            <div>
-                Vuodesta:<br> <input type="number" name="vuodelta" placeholder=" Vuosi (4 dig)"
+                <p id="8">Vuodesta:</p> <input type="number" name="vuodesta" placeholder=" Vuosi (4 dig)"
                                  pattern="[0-9]{4}"
                                  oninvalid="this.setCustomValidity('Invalid year')"/>
             </div>
             <div>
-                Vuoteen:<br> <input type="number" name="vuoteen" placeholder=" Vuosi (4 dig)"
+                <p id="9">Vuoteen:</p> <input type="number" name="vuoteen" placeholder=" Vuosi (4 dig)"
                                 pattern="[0-9]{4}"
                                 oninvalid="this.setCustomValidity('Invalid year')"/>
             </div>
             <div>
-                <input class="nappi" type="submit" />
+                <p id="10">Eräpäivä:</p> <input type="date" name="erapaiva" placeholder=" DD.MM.YYYY"
+                                     pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"/>
+            </div>
+            <div>
+                <input id="11" class="nappi" type="submit" value="Lähetä" />
             </div>
         </fieldset>
     </div>
 </form>
 
 
-
+<script src="js/lainahaku.js"></script>
 </body>
 </html>
