@@ -1,8 +1,8 @@
 <?php
-/*
+
 $servername = "localhost";
-$username = "";
-$password = "";
+$username = "ryhma4";
+$password = "passu";
 $dbname = "kirjasto";
 
 $connection = new mysqli($servername, $username, $password, $dbname);
@@ -118,4 +118,5 @@ function poistettavaKirja(){
     } else if ($metodi=="DELETE") {
         $kirja = poistettavaKirja();
     }
+
 ?>

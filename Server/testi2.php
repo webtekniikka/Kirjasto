@@ -1,4 +1,14 @@
 <?php
-$json = file_get_contents('php://input');
-$testi = json_decode($json);
-echo $json;
+$servername = "localhost";
+$username = "ryhma4";
+$password = "passu";
+$dbname = "kirjasto";
+
+$connection = new mysqli($servername, $username, $password, $dbname);
+
+
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+echo "Connected successfully";
