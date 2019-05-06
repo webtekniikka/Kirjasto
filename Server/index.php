@@ -1,5 +1,12 @@
 <?php
 
+
+$servername = "localhost";
+$username = "ryhma4";
+$password = "passu";
+$dbname = "kirjasto";
+
+
 //function bookList($kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli){
     $servername = "localhost";
     $username = "ryhma4";
@@ -143,4 +150,5 @@ function poistettavaKirja(){
     } else if ($metodi=="DELETE") {
         $kirja = poistettavaKirja();
     }
+
 ?>
