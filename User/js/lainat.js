@@ -1,34 +1,50 @@
-i=0;
+// KIELET
 function new_language() {
     x = document.getElementById("select_language").value;
-    if(i===0){
-        i = 1;
+    if(x === "JPN"){
+        document.getElementById("body_of_page").style.fontFamily = "Meiryo, sans-serif";
+        document.getElementById("body_of_page").style.fontSize = "16px";
+        // korjaus navigaatioon
+        document.getElementById("navigation").style.height = "53px";
     }
-    else {
-        language();
-        i = 0;
+    else{
+        document.getElementById("body_of_page").style.fontFamily = "initial";
+        document.getElementById("body_of_page").style.fontSize = "19px";
+        // korjaus navigaatioon
+        document.getElementById("navigation").style.height = "initial";
     }
-}
-
-x=localStorage.getItem("abr");
-if (x==="ENG"){
-    language();
-}
-if (x==="JPN"){
-    language();
-}
-if (x==="RUS"){
-    language();
-}
-if (x==="FIN"){
-    language();
-}
-if (x==="SWE"){
     language();
 }
 
+// kielen säilyminen siirtyessä toiselle sivulle
+x = localStorage.getItem("abbreviation");
+if (x === "ENG"){
+    document.getElementsByName("ENG")[0].selected = "true";
+    language();
+}
+if (x === "JPN"){
+    document.getElementsByName("JPN")[0].selected = "true";
+    document.getElementById("body_of_page").style.fontFamily = "Meiryo, sans-serif";
+    document.getElementById("body_of_page").style.fontSize = "16px";
+    // korjaus navigaatioon
+    document.getElementById("navigation").style.height = "53px";
+    language();
+}
+if (x === "RUS"){
+    document.getElementsByName("RUS")[0].selected = "true";
+    language();
+}
+if (x === "FIN"){
+    document.getElementsByName("FIN")[0].selected = "true";
+    language();
+}
+if (x === "SWE"){
+    document.getElementsByName("SWE")[0].selected = "true";
+    language();
+}
+
+// käännökset
 function language() {
-    //let x = document.getElementById("select_language").value;
     if(x === "ENG"){
         document.getElementById("i").innerHTML = "Book search";
         document.getElementById("ii").innerHTML = "Loan search";
@@ -42,32 +58,34 @@ function language() {
         document.getElementById("5").innerHTML = "Customer second name:";
         document.getElementsByName('sukunimi')[0].placeholder = " Second name";
         document.getElementById("6").innerHTML = "The due date:";
-        document.getElementById("7").innerHTML = "Submit";
+        document.getElementById("7").value = "Submit";
         document.getElementById("8").innerHTML = "Return";
         document.getElementById("9").innerHTML = "Book's ID:";
-        document.getElementById("10").innerHTML = "Submit";
-        localStorage.setItem("abr", "ENG");
-        let x=localStorage.getItem("abr");
+        document.getElementById("10").value = "Submit";
+        // kielen säilyminen siirtyessä toiselle sivulle
+        localStorage.setItem("abbreviation", "ENG");
+        let x = localStorage.getItem("abbreviation");
     }
     else if(x === "JPN"){
-        document.getElementById("i").innerHTML = "Kirjahaku";
-        document.getElementById("ii").innerHTML = "Lainahaku";
-        document.getElementById("iii").innerHTML = "Lainat";
-        document.getElementById("iv").innerHTML = "Kokoelma";
-        document.getElementById("1").innerHTML = "Lainat";
-        document.getElementById("2").innerHTML = "Laina";
-        document.getElementById("3").innerHTML = "Teoksen ID:";
-        document.getElementById("4").innerHTML = "Asiakkaan etunimi:";
-        document.getElementsByName('etunimi')[0].placeholder = " Etunimi";
-        document.getElementById("5").innerHTML = "Asiakkaan sukunimi:";
-        document.getElementsByName('sukunimi')[0].placeholder = " Sukuunimi";
-        document.getElementById("6").innerHTML = "Eräpäivä:";
-        document.getElementById("7").innerHTML = "Lähetä";
-        document.getElementById("8").innerHTML = "Palauta";
-        document.getElementById("9").innerHTML = "Teoksen ID:";
-        document.getElementById("10").innerHTML = "Lähetä";
-        localStorage.setItem("abr", "JPN");
-        let x=localStorage.getItem("abr");
+        document.getElementById("i").innerHTML = "書籍検索";
+        document.getElementById("ii").innerHTML = "貸出検索";
+        document.getElementById("iii").innerHTML = "貸出";
+        document.getElementById("iv").innerHTML = "本の収集";
+        document.getElementById("1").innerHTML = "貸出";
+        document.getElementById("2").innerHTML = "借り";
+        document.getElementById("3").innerHTML = "本のID:";
+        document.getElementById("4").innerHTML = "客の名前:";
+        document.getElementsByName('etunimi')[0].placeholder = " 名前";
+        document.getElementById("5").innerHTML = "客の苗字:";
+        document.getElementsByName('sukunimi')[0].placeholder = " 苗字";
+        document.getElementById("6").innerHTML = "返す日:";
+        document.getElementById("7").value = "送信";
+        document.getElementById("8").innerHTML = "返す";
+        document.getElementById("9").innerHTML = "本のID:";
+        document.getElementById("10").value = "送信";
+        // kielen säilyminen siirtyessä toiselle sivulle
+        localStorage.setItem("abbreviation", "JPN");
+        let x = localStorage.getItem("abbreviation");
     }
     else if(x === "RUS"){
         document.getElementById("i").innerHTML = "Поиск книги";
@@ -82,12 +100,13 @@ function language() {
         document.getElementById("5").innerHTML = "Фамилия абонента:";
         document.getElementsByName('sukunimi')[0].placeholder = " Фамилия";
         document.getElementById("6").innerHTML = "Выдано до:";
-        document.getElementById("7").innerHTML = "Отправить:";
+        document.getElementById("7").value = "Отправить:";
         document.getElementById("8").innerHTML = "Вернуть";
         document.getElementById("9").innerHTML = "ID книги:";
-        document.getElementById("10").innerHTML = "Отправить";
-        localStorage.setItem("abr", "RUS");
-        let x=localStorage.getItem("abr");
+        document.getElementById("10").value = "Отправить";
+        // kielen säilyminen siirtyessä toiselle sivulle
+        localStorage.setItem("abbreviation", "RUS");
+        let x = localStorage.getItem("abbreviation");
     }
     else if(x === "FIN"){
         document.getElementById("i").innerHTML = "Kirjahaku";
@@ -102,12 +121,13 @@ function language() {
         document.getElementById("5").innerHTML = "Asiakkaan sukunimi:";
         document.getElementsByName('sukunimi')[0].placeholder = " Sukuunimi";
         document.getElementById("6").innerHTML = "Eräpäivä:";
-        document.getElementById("7").innerHTML = "Lähetä";
+        document.getElementById("7").value = "Lähetä";
         document.getElementById("8").innerHTML = "Palauta";
         document.getElementById("9").innerHTML = "Teoksen ID:";
-        document.getElementById("10").innerHTML = "Lähetä";
-        localStorage.setItem("abr", "FIN");
-        let x=localStorage.getItem("abr");
+        document.getElementById("10").value = "Lähetä";
+        // kielen säilyminen siirtyessä toiselle sivulle
+        localStorage.setItem("abbreviation", "FIN");
+        let x = localStorage.getItem("abbreviation");
     }
     else if(x === "SWE"){
         document.getElementById("i").innerHTML = "Kirjahaku";
@@ -122,11 +142,147 @@ function language() {
         document.getElementById("5").innerHTML = "Asiakkaan sukunimi:";
         document.getElementsByName('sukunimi')[0].placeholder = " Sukuunimi";
         document.getElementById("6").innerHTML = "Eräpäivä:";
-        document.getElementById("7").innerHTML = "Lähetä";
+        document.getElementById("7").value = "Lähetä";
         document.getElementById("8").innerHTML = "Palauta";
         document.getElementById("9").innerHTML = "Teoksen ID:";
-        document.getElementById("10").innerHTML = "Lähetä";
-        localStorage.setItem("abr", "SWE");
-        let x=localStorage.getItem("abr");
+        document.getElementById("10").value = "Lähetä";
+        // kielen säilyminen siirtyessä toiselle sivulle
+        localStorage.setItem("abbreviation", "SWE");
+        let x = localStorage.getItem("abbreviation");
     }
+}
+
+// TEEMAT
+function new_theme() {
+    y = document.getElementById("select_theme").value;
+    theme();
+}
+
+y = localStorage.getItem("number");
+if (y === "t1"){
+    document.getElementsByName("t1")[0].selected = "true";
+    theme();
+}
+if (y === "t2"){
+    document.getElementsByName("t2")[0].selected = "true";
+    theme();
+}
+if (y === "t3"){
+    document.getElementsByName("t3")[0].selected = "true";
+    theme();
+}
+function  theme() {
+    if(y === "t1"){
+        document.getElementById("body_of_page").style.backgroundColor = "yellow";
+        document.getElementsByTagName("ul")[0].style.backgroundColor = "#ff8000";
+        document.getElementsByTagName("h1")[0].style.color = "black";
+        document.getElementsByTagName("legend")[0].style.color = "black";
+        document.getElementsByTagName("legend")[1].style.color = "black";
+        let p_elements = document.getElementsByTagName("p");
+        let i;
+        for (i = 0; i < p_elements.length; i++) {
+            p_elements[i].style.color = "black";
+        }
+        localStorage.setItem("number", "t1");
+        let y = localStorage.getItem("number");
+    }
+    else if(y === "t2"){
+        document.getElementById("body_of_page").style.backgroundColor = "white";
+        document.getElementsByTagName("ul")[0].style.backgroundColor = "#d3d3d3";
+        document.getElementsByTagName("h1")[0].style.color = "black";
+        document.getElementsByTagName("legend")[0].style.color = "black";
+        document.getElementsByTagName("legend")[1].style.color = "black";
+        let p_elements = document.getElementsByTagName("p");
+        let i;
+        for (i = 0; i < p_elements.length; i++) {
+            p_elements[i].style.color = "black";
+        }
+        localStorage.setItem("number", "t2");
+        let y = localStorage.getItem("number");
+    }
+    else if(y === "t3"){
+        document.getElementById("body_of_page").style.backgroundColor = "black";
+        document.getElementsByTagName("ul")[0].style.backgroundColor = "#404040";
+        document.getElementsByTagName("h1")[0].style.color = "white";
+        document.getElementsByTagName("legend")[0].style.color = "white";
+        document.getElementsByTagName("legend")[1].style.color = "white";
+        let p_elements = document.getElementsByTagName("p");
+        let i;
+        for (i = 0; i < p_elements.length; i++) {
+            p_elements[i].style.color = "white";
+        }
+        localStorage.setItem("number", "t3");
+        let y = localStorage.getItem("number");
+    }
+}
+
+// HAUT
+function laina(){
+
+    // Luodaan url
+    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+
+    let nimi = document.getElementsByName("nimi")[0].value;
+    url += "nimi="+nimi;
+    let knimi = document.getElementsByName("knimi")[0].value;
+    url += "&knimi=" + knimi;
+    let id = document.getElementsByName("id")[0].value;
+    url += "&id=" + id;
+    let kieli = document.getElementsByName("kieli")[0].value;
+    url += "&kieli="+kieli;
+    let isbn = document.getElementsByName("isbn")[0].value;
+    url += "&isbn="+isbn;
+    let vuodesta = document.getElementsByName("vuodesta")[0].value;
+    url += "&vuodesta="+vuodesta;
+    let vuoteen = document.getElementsByName("vuoteen")[0].value;
+    url += "&vuoteen="+vuoteen;
+
+
+
+    // tehdään XMLrequest ja lähetetään se
+    let xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function(){
+        if (xml.readyState == 4 && xml.status == 200) {
+            document.getElementById("hakutulos").innerHTML = xml.responseText;
+        }
+    };
+    xml.open("GET", url, true);
+    xml.send();
+
+}
+
+function palauta(){
+
+    // Luodaan url
+    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+
+    let nimi = document.getElementsByName("nimi")[0].value;
+    url += "nimi="+nimi;
+    let knimi = document.getElementsByName("knimi")[0].value;
+    url += "&knimi=" + knimi;
+    let id = document.getElementsByName("id")[0].value;
+    url += "&id=" + id;
+    let kieli = document.getElementsByName("kieli")[0].value;
+    url += "&kieli="+kieli;
+    let isbn = document.getElementsByName("isbn")[0].value;
+    url += "&isbn="+isbn;
+    let vuodesta = document.getElementsByName("vuodesta")[0].value;
+    url += "&vuodesta="+vuodesta;
+    let vuoteen = document.getElementsByName("vuoteen")[0].value;
+    url += "&vuoteen="+vuoteen;
+
+
+
+    // tehdään XMLrequest ja lähetetään se
+    let xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function(){
+        if (xml.readyState == 4 && xml.status == 200) {
+            document.getElementById("hakutulos").innerHTML = xml.responseText;
+        }
+    };
+    xml.open("GET", url, true);
+    xml.send();
+
 }
