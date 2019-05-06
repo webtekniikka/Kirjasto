@@ -240,59 +240,50 @@ function  theme() {
 function lisaa_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto/Server/index.php";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    let uusinimi = document.getElementsByName("nimi")[0].value;
+    let uusiknimi = document.getElementsByName("knimi")[0].value;
+    let uusiid = document.getElementsByName("id")[0].value;
+    let uusikieli = document.getElementsByName("kieli")[0].value;
+    let uusiisbn = document.getElementsByName("isbn")[0].value;
+    let uusivuosi = document.getElementsByName("vuosi")[0].value;
 
+    let kirja ={
+        "nimi" : uusinimi,
+        "knimi" : uusiknimi,
+        "id" : uusiid,
+        "kieli" : uusikieli,
+        "isbn" : uusiisbn,
+        "vuosi" : uusivuosi
+    };
 
+    let kirjastring =JSON.stringify(kirja);
+    console.log(kirjastring);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
 
     xml.onreadystatechange = function(){
-        if (xml.readyState == 4 && xml.status == 200) {
+        if (xml.readyState === 4 && xml.status === 200) {
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("GET", url, true);
-    xml.send();
+    xml.open("POST", url, true);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(kirjastring);
 
 }
 
 function poista_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto/Server/index.php";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    let id = document.getElementsByName('id1')[0].value;
 
-
+    console.log(id);
+    url += "?id="+id;
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -302,7 +293,7 @@ function poista_kirja(){
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("GET", url, true);
+    xml.open("DELETE", url, true);
     xml.send();
 
 }
