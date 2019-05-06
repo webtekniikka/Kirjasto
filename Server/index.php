@@ -48,4 +48,56 @@ stsmt->close()*/
 
 $connection->close();
 
+//
+//      Apumetodit
+//
+function getKirjaHakuKriteerit(){
+    $nimi = $_GET["nimi"];
+    $knimi = $_GET["knimi"];
+    $id = $_GET["id"];
+    $kieli = $_GET["kieli"];
+    $isbn = $_GET["isbn"];
+    $vuodesta = $_GET["vuodesta"];
+    $vuoteen = $_GET["vuoteen"];
+
+    $hakukriteerit = array();
+
+    if (!empty($nimi)){
+        $hakukriteerit['nimi'] = $nimi;
+    }
+    if (!empty($knimi)) {
+        $hakukriteerit['knimi'] = $knimi;
+    }
+    if (!empty($id)){
+        $hakukriteerit['id'] = $id;
+    }
+    if (!empty($kieli)){
+        $hakukriteerit['kieli'] = $kieli;
+    }
+    if (!empty($isbn)){
+        $hakukriteerit['isbn'] = $isbn;
+    }
+    if (!empty($vuodesta)){
+        $hakukriteerit['vuodesta'] = $vuodesta;
+    }
+    if (!empty($vuoteen)){
+        $hakukriteerit['vuoteen'] = $vuoteen;
+    }
+    return $hakukriteerit;
+}
+
+function getMetodi(){
+    $metodi =$_SERVER['REQUEST_METHOD'];
+    return $metodi;
+}
+
+//
+//      Pää Metodit
+//
+    $metodi = getMetodi();
+
+    if ($metodi=="GET"){
+        $hakukriteerit = getKirjaHakuKriteerit();
+        $bookList($hakukriteerit);
+    }
 ?>
