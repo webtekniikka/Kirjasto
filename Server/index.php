@@ -1,9 +1,11 @@
 <?php
+
 //function bookList($kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli){
     $servername = "localhost";
     $username = "ryhma4";
     $password = "passu";
     $dbname = "kirjasto";
+
 
     $connection = new mysqli($servername, $username, $password, $dbname);
 
@@ -69,7 +71,76 @@ $connection->close();
     $stmt->close();
 
 
-    $connection->close();
-*/
+//$connection->close();
 
+//
+//      Apumetodit
+//
+function getKirjaHakuKriteerit(){
+    $nimi = $_GET["nimi"];
+    $knimi = $_GET["knimi"];
+    $id = $_GET["id"];
+    $kieli = $_GET["kieli"];
+    $isbn = $_GET["isbn"];
+    $vuodesta = $_GET["vuodesta"];
+    $vuoteen = $_GET["vuoteen"];
+
+    $hakukriteerit = array();
+
+    if (!empty($nimi)){
+        $hakukriteerit['nimi'] = $nimi;
+    }
+    if (!empty($knimi)) {
+        $hakukriteerit['knimi'] = $knimi;
+    }
+    if (!empty($id)){
+        $hakukriteerit['id'] = $id;
+    }
+    if (!empty($kieli)){
+        $hakukriteerit['kieli'] = $kieli;
+    }
+    if (!empty($isbn)){
+        $hakukriteerit['isbn'] = $isbn;
+    }
+    if (!empty($vuodesta)){
+        $hakukriteerit['vuodesta'] = $vuodesta;
+    }
+    if (!empty($vuoteen)){
+        $hakukriteerit['vuoteen'] = $vuoteen;
+    }
+    $haku = json_encode($hakukriteerit);
+    return $haku;
+
+
+}
+
+function getMetodi(){
+    $metodi =$_SERVER['REQUEST_METHOD'];
+    return $metodi;
+}
+
+function addKirja(){
+    $json = file_get_contents('php://input');
+    $kirja = json_decode($json);
+    return $kirja;
+}
+
+function poistettavaKirja(){
+    return $_GET['id'];
+}
+
+//
+//      Pää Metodit
+//
+    $metodi = getMetodi();
+
+    if ($metodi=="GET"){
+        $hakukriteerit = getKirjaHakuKriteerit();
+        echo $hakukriteerit;
+  //      $bookList($hakukriteerit);
+    } else if ($metodi=="POST"){
+        $uusikirja = addKirja();
+    } else if ($metodi=="DELETE") {
+        $kirja = poistettavaKirja();
+    }
 ?>
