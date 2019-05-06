@@ -149,7 +149,7 @@ function language() {
 function kirjahaku(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto/Server/index.php?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
         url += "nimi="+nimi;
