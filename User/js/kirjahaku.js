@@ -167,6 +167,7 @@ function language() {
     }
 }
 
+
 // TEEMAT
 function new_theme() {
     y = document.getElementById("select_theme").value;
@@ -248,8 +249,6 @@ function hae_kirja(){
     url += "&vuodesta="+vuodesta;
     let vuoteen = document.getElementsByName("vuoteen")[0].value;
     url += "&vuoteen="+vuoteen;
-
-
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
