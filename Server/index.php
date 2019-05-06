@@ -1,4 +1,5 @@
 <?php
+/*
 $servername = "localhost";
 $username = "";
 $password = "";
@@ -46,7 +47,7 @@ $tulosArray = array('numOfRows'=>strval($result->num_rows),'rows'=>$kirjaArray);
 echo json_encode($tulosArray);
 stsmt->close()*/
 
-$connection->close();
+//$connection->close();
 
 //
 //      Apumetodit
@@ -83,12 +84,24 @@ function getKirjaHakuKriteerit(){
     if (!empty($vuoteen)){
         $hakukriteerit['vuoteen'] = $vuoteen;
     }
-    return $hakukriteerit;
+    $haku = json_encode($hakukriteerit);
+    return $haku;
+
 }
 
 function getMetodi(){
     $metodi =$_SERVER['REQUEST_METHOD'];
     return $metodi;
+}
+
+function addKirja(){
+    $json = file_get_contents('php://input');
+    $kirja = json_decode($json);
+    return $kirja;
+}
+
+function poistettavaKirja(){
+    return $_GET['id'];
 }
 
 //
@@ -98,6 +111,11 @@ function getMetodi(){
 
     if ($metodi=="GET"){
         $hakukriteerit = getKirjaHakuKriteerit();
-        $bookList($hakukriteerit);
+        echo $hakukriteerit;
+  //      $bookList($hakukriteerit);
+    } else if ($metodi=="POST"){
+        $uusikirja = addKirja();
+    } else if ($metodi=="DELETE") {
+        $kirja = poistettavaKirja();
     }
 ?>

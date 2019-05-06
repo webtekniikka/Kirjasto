@@ -233,7 +233,7 @@ function  theme() {
 function hae_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto/Server/index.php?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi="+nimi;
@@ -254,7 +254,7 @@ function hae_kirja(){
     let xml = new XMLHttpRequest();
 
     xml.onreadystatechange = function(){
-        if (xml.readyState == 4 && xml.status == 200) {
+        if (xml.readyState === 4 && xml.status === 200) {
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
