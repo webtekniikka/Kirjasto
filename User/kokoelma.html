@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 
 <head>
     <meta charset="utf-8"/>
@@ -73,7 +73,7 @@
             </div>
 
             <div>
-                <input id="9" class="nappi" type="submit" value="Lähetä"/>
+                <input id="9" class="nappi" onclick="lisaa_kirja()" type="button" value="Lähetä"/>
             </div>
         </fieldset>
     </div>
@@ -84,12 +84,12 @@
         <fieldset>
             <legend id="10">Poista kirja</legend>
             <div>
-                <p id="11">Teoksen ID:</p> <input type="text" name="id" placeholder=" ID (3 dig)"
+                <p id="11">Teoksen ID:</p> <input type="text" name="id1" placeholder=" ID (3 dig)"
                                    pattern="[0-9]{3}"
                                    oninvalid="this.setCustomValidity('Invalid ID id')"/>
             </div>
             <div>
-                <input id="12" class="nappi" type="submit" value="Lähetä"/>
+                <input id="12" class="nappi" onclick="poista_kirja()" type="button" value="Lähetä"/>
             </div>
         </fieldset>
     </div>

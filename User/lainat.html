@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 
 <head>
     <meta charset="utf-8"/>
@@ -63,7 +63,7 @@
             pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}"/>
             </div>
             <div>
-                <input id="7" class="nappi" type="submit" value="Lähetä" />
+                <input id="7" class="nappi" onclick="laina()" type="button" value="Lähetä" />
             </div>
         </fieldset>
     </div>
@@ -74,12 +74,12 @@
         <fieldset>
             <legend id="8">Palauta</legend>
             <div>
-                <p id="9">Teoksen ID:</p> <input type="text" name="id" placeholder=" ID (3 dig)"
+                <p id="9">Teoksen ID:</p> <input type="text" name="id1" placeholder=" ID (3 dig)"
                                    pattern="[0-9]{3}"
                                    oninvalid="this.setCustomValidity('Invalid ID id')"/>
             </div>
             <div>
-                <input id="10" class="nappi" type="submit" value="Lähetä"/>
+                <input id="10" class="nappi" onclick="palauta()" type="button" value="Lähetä"/>
             </div>
         </fieldset>
     </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 
 <head>
     <meta charset="utf-8"/>
@@ -34,9 +34,9 @@
 <!-- Teemat -->
 <span>
     <select id="select_theme" onchange="new_theme()">
-        <option value="t1" name="t1">Theme 1</option>
-        <option value="t2" name="t2">Theme 2</option>
-        <option value="t3" name="t3">Theme 3</option>
+        <option id="v" value="t1" name="t1">Theme 1</option>
+        <option id="vi" value="t2" name="t2">Theme 2</option>
+        <option id="vii" value="t3" name="t3">Theme 3</option>
     </select>
 </span>
 
@@ -67,17 +67,12 @@
                                      oninvalid="this.setCustomValidity('Invalid ISBN')"/>
             </div>
             <div>
-                <p id="8">Vuodesta:</p> <input type="number" name="vuodesta" placeholder=" Vuosi (4 dig)"
+                <p id="8">Julkaisuvuosi:</p> <input type="number" name="vuosi" placeholder=" Vuosi (4 dig)"
                                  pattern="[0-9]{4}"
                                  oninvalid="this.setCustomValidity('Invalid year')"/>
             </div>
             <div>
-                <p id="9">Vuoteen:</p> <input type="number" name="vuoteen" placeholder=" Vuosi (4 dig)"
-                                pattern="[0-9]{4}"
-                                oninvalid="this.setCustomValidity('Invalid year')"/>
-            </div>
-            <div>
-                <input id="10" class="nappi" type="submit" value="Lähetä" />
+                <input id="9" class="nappi" onclick="hae_kirja()" type="button" value="Lähetä" />
             </div>
         </fieldset>
     </div>

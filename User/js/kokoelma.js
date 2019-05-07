@@ -110,7 +110,7 @@ function language() {
         document.getElementById("6").innerHTML = "Язык:";
         document.getElementsByName('kieli')[0].placeholder = " Язык";
         document.getElementById("7").innerHTML = "ISBN книги::";
-        document.getElementById("8").innerHTML = "Издано:";
+        document.getElementById("8").innerHTML = "Год издания:";
         document.getElementsByName('vuosi')[0].placeholder = " Год(4 dig)";
         document.getElementById("9").value = "Отправить";
         document.getElementById("10").innerHTML = "Удалить книгу";
@@ -135,7 +135,7 @@ function language() {
         document.getElementById("6").innerHTML = "Teoksen kieli:";
         document.getElementsByName('kieli')[0].placeholder = " Kieli";
         document.getElementById("7").innerHTML = "Teoksen ISBN:";
-        document.getElementById("8").innerHTML = "Julkaistu:";
+        document.getElementById("8").innerHTML = "Julkaisuvuosi:";
         document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
         document.getElementById("9").value = "Lähetä";
         document.getElementById("10").innerHTML = "Poista kirja";
@@ -178,6 +178,7 @@ function new_theme() {
     theme();
 }
 
+// teeman säilyminen siirtyessä toiselle sivulle
 y = localStorage.getItem("number");
 if (y === "t1"){
     document.getElementsByName("t1")[0].selected = "true";
@@ -191,6 +192,8 @@ if (y === "t3"){
     document.getElementsByName("t3")[0].selected = "true";
     theme();
 }
+
+// teemat
 function  theme() {
     if(y === "t1"){
         document.getElementById("body_of_page").style.backgroundColor = "yellow";
@@ -203,6 +206,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "black";
         }
+        document.getElementById("hakutulos").style.color = "black";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t1");
         let y = localStorage.getItem("number");
     }
@@ -217,6 +222,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "black";
         }
+        document.getElementById("hakutulos").style.color = "black";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t2");
         let y = localStorage.getItem("number");
     }
@@ -231,6 +238,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "white";
         }
+        document.getElementById("hakutulos").style.color = "white";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t3");
         let y = localStorage.getItem("number");
     }
@@ -240,22 +249,20 @@ function  theme() {
 function lisaa_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto_user/Server/index.php?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
+    url += "nimi=" + nimi;
     let knimi = document.getElementsByName("knimi")[0].value;
     url += "&knimi=" + knimi;
     let id = document.getElementsByName("id")[0].value;
     url += "&id=" + id;
     let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
+    url += "&kieli=" + kieli;
     let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    url += "&isbn=" + isbn;
+    let vuosi = document.getElementsByName("vuosi")[0].value;
+    url += "&vuosi=" + vuosi;
 
 
 
@@ -263,7 +270,7 @@ function lisaa_kirja(){
     let xml = new XMLHttpRequest();
 
     xml.onreadystatechange = function(){
-        if (xml.readyState == 4 && xml.status == 200) {
+        if (xml.readyState === 4 && xml.status === 200) {
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
@@ -275,22 +282,11 @@ function lisaa_kirja(){
 function poista_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto_user/Server/index.php?";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    let id1 = document.getElementsByName("id1")[0].value;
+    url += "&id1=" + id1;
+
 
 
 
@@ -298,7 +294,7 @@ function poista_kirja(){
     let xml = new XMLHttpRequest();
 
     xml.onreadystatechange = function(){
-        if (xml.readyState == 4 && xml.status == 200) {
+        if (xml.readyState === 4 && xml.status === 200) {
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
