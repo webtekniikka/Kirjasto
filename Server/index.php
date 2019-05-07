@@ -1,21 +1,42 @@
 <?php
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> origin/qwerty
 $servername = "localhost";
 $username = "";
 $password = "";
 $dbname = "kirjasto";
+<<<<<<< HEAD
 $connection = new mysqli($servername, $username, $password, $dbname);
+=======
+
+$connection = new mysqli($servername, $username, $password, $dbname);
+
+
+>>>>>>> origin/qwerty
 // Check connection
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 echo "Connected successfully";
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/qwerty
 /*
 //Haku toimivuus epäselvä
 $stmt = connection->prepare("SELECT * FROM kirat
 WHERE Kirja_id=? or Nimi=? or  kustantaja=? or julkaisuvuosi=? or kirjailija=? or ISBN=? or Painos=? or kieli=? and saatavuus='Kyllä'");
 $stmt->bind_param("ississis", $kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli);
+<<<<<<< HEAD
 $result = $stmt->execute();
+=======
+
+$result = $stmt->execute();
+
+>>>>>>> origin/qwerty
 if ($result > 0) {
     // output data of each row
     $kirjaArray = array();
@@ -35,9 +56,19 @@ if ($result > 0) {
     echo "0 results";
 }
 $tulosArray = array('numOfRows'=>strval($result->num_rows),'rows'=>$kirjaArray);
+<<<<<<< HEAD
 echo json_encode($tulosArray);
 stsmt->close()*/
 //$connection->close();
+=======
+
+
+echo json_encode($tulosArray);
+stsmt->close()*/
+
+$connection->close();
+
+>>>>>>> origin/qwerty
 //
 //      Apumetodit
 //
@@ -47,8 +78,16 @@ function getKirjaHakuKriteerit(){
     $id = $_GET["id"];
     $kieli = $_GET["kieli"];
     $isbn = $_GET["isbn"];
+<<<<<<< HEAD
     $vuosi = $_GET["vuosi"];
     $hakukriteerit = array();
+=======
+    $vuodesta = $_GET["vuodesta"];
+    $vuoteen = $_GET["vuoteen"];
+
+    $hakukriteerit = array();
+
+>>>>>>> origin/qwerty
     if (!empty($nimi)){
         $hakukriteerit['nimi'] = $nimi;
     }
@@ -64,16 +103,29 @@ function getKirjaHakuKriteerit(){
     if (!empty($isbn)){
         $hakukriteerit['isbn'] = $isbn;
     }
+<<<<<<< HEAD
     if (!empty($vuosi)){
         $hakukriteerit['vuosi'] = $vuosi;
     }
     $haku = json_encode($hakukriteerit);
     return $haku;
 }
+=======
+    if (!empty($vuodesta)){
+        $hakukriteerit['vuodesta'] = $vuodesta;
+    }
+    if (!empty($vuoteen)){
+        $hakukriteerit['vuoteen'] = $vuoteen;
+    }
+    return $hakukriteerit;
+}
+
+>>>>>>> origin/qwerty
 function getMetodi(){
     $metodi =$_SERVER['REQUEST_METHOD'];
     return $metodi;
 }
+<<<<<<< HEAD
 function addKirja(){
     $json = file_get_contents('php://input');
     $kirja = json_decode($json);
@@ -95,4 +147,16 @@ if ($metodi=="GET"){
 } else if ($metodi=="DELETE") {
     $kirja = poistettavaKirja();
 }
+=======
+
+//
+//      Pää Metodit
+//
+    $metodi = getMetodi();
+
+    if ($metodi=="GET"){
+        $hakukriteerit = getKirjaHakuKriteerit();
+        $bookList($hakukriteerit);
+    }
+>>>>>>> origin/qwerty
 ?>
