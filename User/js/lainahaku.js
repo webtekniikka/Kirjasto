@@ -237,8 +237,8 @@ function  theme() {
 function hae_laina(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
-
+    let url = "http://localhost:80/Kirjasto/Server/lainat/";
+/*
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi="+nimi;
     let knimi = document.getElementsByName("knimi")[0].value;
@@ -253,7 +253,7 @@ function hae_laina(){
     url += "&vuodesta="+vuodesta;
     let vuoteen = document.getElementsByName("vuoteen")[0].value;
     url += "&vuoteen="+vuoteen;
-
+*/
 
 
     // tehdään XMLrequest ja lähetetään se

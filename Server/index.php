@@ -192,13 +192,19 @@ function poistettavaKirja(){
 //
     $metodi = getMetodi();
     $resurssi = getResurssi();
-    if ($metodi=="GET" && $resurssi[0]=="kirja"){
+    if ($metodi=="GET" && $resurssi[0]=="kirja") {
         echo $resurssi[0];
         $hakukriteerit = getKirjaHakuKriteerit();//       $bookList($hakukriteerit);
-    } else if ($metodi=="POST"){
+    } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
+        echo $resurssi[0];
+    } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $uusikirja = addKirja();
-    } else if ($metodi=="DELETE") {
+    } else if ($metodi=="POST" && $resurssi[0]=="laina"){
+
+    } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
         $kirja = poistettavaKirja();
+    } else if ($metodi=="DELETE" && $resurssi[0]=="laina"){
+
     }
 */
 ?>
