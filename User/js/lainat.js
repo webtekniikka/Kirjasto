@@ -55,8 +55,8 @@ function language() {
         document.getElementById("3").innerHTML = "Book's ID:";
         document.getElementById("4").innerHTML = "Customer first name:";
         document.getElementsByName('etunimi')[0].placeholder = " First name";
-        document.getElementById("5").innerHTML = "Customer second name:";
-        document.getElementsByName('sukunimi')[0].placeholder = " Second name";
+        document.getElementById("5").innerHTML = "Customer last name:";
+        document.getElementsByName('sukunimi')[0].placeholder = " Last name";
         document.getElementById("6").innerHTML = "The due date:";
         document.getElementById("7").value = "Submit";
         document.getElementById("8").innerHTML = "Return";
@@ -158,6 +158,7 @@ function new_theme() {
     theme();
 }
 
+// teeman säilyminen siirtyessä toiselle sivulle
 y = localStorage.getItem("number");
 if (y === "t1"){
     document.getElementsByName("t1")[0].selected = "true";
@@ -171,6 +172,8 @@ if (y === "t3"){
     document.getElementsByName("t3")[0].selected = "true";
     theme();
 }
+
+// teemat
 function  theme() {
     if(y === "t1"){
         document.getElementById("body_of_page").style.backgroundColor = "yellow";
@@ -183,6 +186,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "black";
         }
+        document.getElementById("hakutulos").style.color = "black";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t1");
         let y = localStorage.getItem("number");
     }
@@ -197,6 +202,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "black";
         }
+        document.getElementById("hakutulos").style.color = "black";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t2");
         let y = localStorage.getItem("number");
     }
@@ -211,6 +218,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "white";
         }
+        document.getElementById("hakutulos").style.color = "white";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t3");
         let y = localStorage.getItem("number");
     }
@@ -220,6 +229,7 @@ function  theme() {
 function laina(){
 
     // Luodaan url
+
     let url = "http://localhost:80/Kirjasto/Server/laina/luo";
 
     // haetaan luotavan lainan tiedot
@@ -266,6 +276,7 @@ function laina(){
 function palauta(){
 
     // Luodaan url
+
     let url = "http://localhost:80/Kirjasto/Server/laina/palauta/";
 
     let id = document.getElementsByName("id")[1].value;

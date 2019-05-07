@@ -1,4 +1,6 @@
 <?php
+
+
 /*
     $servername = "localhost";
     $username = "ryhma4";
@@ -6,6 +8,7 @@
     $dbname = "kirjasto";
 
     $connection = new mysqli($servername, $username, $password, $dbname);
+
 
     // Check connection
     if ($connection->connect_error) {
@@ -15,6 +18,14 @@
 */
 
 /*  ei käytössä
+
+
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+echo "Connected successfully";
+
 
     $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Kustantaja, Julkaisuvuosi, Kirjailija, ISBN, Painos, Kieli, Saatavuus)
     VALUES (004, 'Testi3', 'OTAVA', 2006, 'Kirjailija_o', '4ANa222', 3, 'Saksa','Kyllä')";
@@ -43,7 +54,43 @@ $connection->close();
 
 
 
+
+
 /*
+
+//Haku toimivuus epäselvä
+$stmt = connection->prepare("SELECT * FROM kirat
+WHERE Kirja_id=? or Nimi=? or  kustantaja=? or julkaisuvuosi=? or kirjailija=? or ISBN=? or Painos=? or kieli=? and saatavuus='Kyllä'");
+$stmt->bind_param("ississis", $kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli);
+
+
+$result = $stmt->execute();
+
+if ($result > 0) {
+    // output data of each row
+    $kirjaArray = array();
+    while($row = $reuslt->fetch_assoc()) {
+        echo '<br />'.$row['Kirja_id'] . '<br />';
+        echo $row['Nimi'] . '<br />';
+        echo $row['Kustantaja'].'<br />';
+        echo $row['Julkaisuvuosi'].'<br />';
+        echo $row['Kirjailija'].'<br />';
+        echo $row['ISBN'].'<br />';
+        echo $row['Painos'].'<br />';
+        echo $row['Kieli'].'<br />';
+        echo $row['Saatavuus'].'<br />';
+        $kirjaArray[] = $row;
+    }
+} else {
+    echo "0 results";
+}
+$tulosArray = array('numOfRows'=>strval($result->num_rows),'rows'=>$kirjaArray);
+
+echo json_encode($tulosArray);
+stsmt->close()*/
+//$connection->close();
+
+
     //Pätkä toimii tarvitsee vielä kimpassa miettii toteutusta haku ei liian sepsifoiva
     $sql ="SELECT * FROM kirjat
     WHERE Kirja_Id=? or Nimi=? or  Kustantaja=? or Julkaisuvuosi=? or Kirjailija=? or ISBN=? or Painos=? or Kieli=? and Saatavuus=?";
@@ -73,6 +120,7 @@ $connection->close();
     }
     $tulosArray = array('numOfRows'=>strval($result->num_rows),'rows'=>$kirjaArray);
 
+
     $jsonArray = json_encode($tulosArray);
     echo $jsonArray;
     $stmt->close();
@@ -98,6 +146,8 @@ $connection->close();
 
 
 
+
+
  /*   //Kirjan poistaminen id:llä toimii
     $sql= "DELETE FROM kirjat WHERE Kirja_Id=?";
     $stmt = $connection->prepare($sql);
@@ -112,6 +162,7 @@ $connection->close();
     $stmt->close();
     $connection->close();
 */
+
 //
 //      Apumetodit
 //
@@ -138,7 +189,6 @@ function getKirjaHakuKriteerit(){
     $kieli = $_GET["kieli"];
     $isbn = $_GET["isbn"];
     $vuosi = $_GET["vuosi"];
-
     $hakukriteerit = array();
 
     if (!empty($nimi)){
@@ -156,9 +206,12 @@ function getKirjaHakuKriteerit(){
     if (!empty($isbn)){
         $hakukriteerit['isbn'] = $isbn;
     }
-    if (!empty($vuodesta)){
+    if (!empty($vuosi)){
         $hakukriteerit['vuosi'] = $vuosi;
     }
+    $haku = json_encode($hakukriteerit);
+
+
 
     //$haku = json_encode($hakukriteerit);
     foreach($hakukriteerit as $x => $x_value) {
