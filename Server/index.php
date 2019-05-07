@@ -1,16 +1,11 @@
 <?php
 
-
-
-//function bookList($kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli){
     $servername = "localhost";
     $username = "ryhma4";
     $password = "passu";
     $dbname = "kirjasto";
 
-
     $connection = new mysqli($servername, $username, $password, $dbname);
-
 
     // Check connection
     if ($connection->connect_error) {
@@ -18,7 +13,9 @@
     }
     echo "Connected successfully";
 
+
 /*  ei käytössä
+
     $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Kustantaja, Julkaisuvuosi, Kirjailija, ISBN, Painos, Kieli, Saatavuus)
     VALUES (004, 'Testi3', 'OTAVA', 2006, 'Kirjailija_o', '4ANa222', 3, 'Saksa','Kyllä')";
 
@@ -26,7 +23,10 @@
         echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $connection->error;
+    }
+    $connection->close();
 }
+
 $connection->close();
 */
 
@@ -40,6 +40,7 @@ $connection->close();
     $ISBN = "ABC123ABC";
     $painos = 1;
     $kieli = "Ranska";
+
 
 
 /*
@@ -96,6 +97,7 @@ $connection->close();
 */
 
 
+
  /*   //Kirjan poistaminen id:llä toimii
     $sql= "DELETE FROM kirjat WHERE Kirja_Id=?";
     $stmt = $connection->prepare($sql);
@@ -109,12 +111,27 @@ $connection->close();
     }
     $stmt->close();
     $connection->close();
-*/
+
 //
 //      Apumetodit
 //
 
-/*function getKirjaHakuKriteerit(){
+
+
+function getResurssi(){
+    $resurssi_string =$_SERVER['REQUEST_URI'];
+    if (strstr($resurssi_string, '?')) {
+        $resurssi_string = substr($resurssi_string, 0, strpos($resurssi_string, '?'));
+    }
+    $resurssi = explode('/', $resurssi_string);
+
+    for ($i=0;$i<3;$i++){
+        array_shift($resurssi);
+    }
+    return $resurssi;
+}
+
+function getKirjaHakuKriteerit(){
     $nimi = $_GET["nimi"];
     $knimi = $_GET["knimi"];
     $id = $_GET["id"];
@@ -146,8 +163,11 @@ $connection->close();
     if (!empty($vuoteen)){
         $hakukriteerit['vuoteen'] = $vuoteen;
     }
-    $haku = json_encode($hakukriteerit);
-    return $haku;
+    //$haku = json_encode($hakukriteerit);
+    foreach($hakukriteerit as $x => $x_value) {
+        echo "Key=" . $x . ", Value=" . $x_value;
+    }
+    return $hakukriteerit;
 
 
 }
@@ -171,11 +191,10 @@ function poistettavaKirja(){
 //      Pää Metodit
 //
     $metodi = getMetodi();
-
-    if ($metodi=="GET"){
-        $hakukriteerit = getKirjaHakuKriteerit();
-        echo $hakukriteerit;
-  //      $bookList($hakukriteerit);
+    $resurssi = getResurssi();
+    if ($metodi=="GET" && $resurssi[0]=="kirja"){
+        echo $resurssi[0];
+        $hakukriteerit = getKirjaHakuKriteerit();//       $bookList($hakukriteerit);
     } else if ($metodi=="POST"){
         $uusikirja = addKirja();
     } else if ($metodi=="DELETE") {
