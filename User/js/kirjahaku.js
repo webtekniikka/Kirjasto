@@ -233,7 +233,7 @@ function  theme() {
 function hae_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/index.php?";
+    let url = "http://localhost:80/Kirjasto/Server/kirja/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi="+nimi;
