@@ -1,4 +1,5 @@
 // KIELET
+
 function new_language() {
     x = document.getElementById("select_language").value;
     if(x === "JPN"){
@@ -240,7 +241,7 @@ function  theme() {
 function lisaa_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/index.php";
+    let url = "http://localhost:80/Kirjasto/Server/kirja/";
 
     let uusinimi = document.getElementsByName("nimi")[0].value;
     let uusiknimi = document.getElementsByName("knimi")[0].value;
@@ -258,8 +259,8 @@ function lisaa_kirja(){
         "vuosi" : uusivuosi
     };
 
-    let kirjastring =JSON.stringify(kirja);
-    console.log(kirjastring);
+    let data =JSON.stringify(kirja);
+    console.log(data);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -271,14 +272,14 @@ function lisaa_kirja(){
     };
     xml.open("POST", url, true);
     xml.setRequestHeader("Content-Type", "application/json");
-    xml.send(kirjastring);
+    xml.send(data);
 
 }
 
 function poista_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/index.php";
+    let url = "http://localhost:80/Kirjasto/Server/kirja/";
 
     let id = document.getElementsByName('id1')[0].value;
 

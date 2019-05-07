@@ -1,5 +1,5 @@
 <?php
-
+/*
     $servername = "localhost";
     $username = "ryhma4";
     $password = "passu";
@@ -12,7 +12,7 @@
         die("Connection failed: " . $connection->connect_error);
     }
     echo "Connected successfully";
-
+*/
 
 /*  ei käytössä
 
@@ -111,7 +111,7 @@ $connection->close();
     }
     $stmt->close();
     $connection->close();
-
+*/
 //
 //      Apumetodit
 //
@@ -137,8 +137,7 @@ function getKirjaHakuKriteerit(){
     $id = $_GET["id"];
     $kieli = $_GET["kieli"];
     $isbn = $_GET["isbn"];
-    $vuodesta = $_GET["vuodesta"];
-    $vuoteen = $_GET["vuoteen"];
+    $vuosi = $_GET["vuosi"];
 
     $hakukriteerit = array();
 
@@ -158,18 +157,19 @@ function getKirjaHakuKriteerit(){
         $hakukriteerit['isbn'] = $isbn;
     }
     if (!empty($vuodesta)){
-        $hakukriteerit['vuodesta'] = $vuodesta;
+        $hakukriteerit['vuosi'] = $vuosi;
     }
-    if (!empty($vuoteen)){
-        $hakukriteerit['vuoteen'] = $vuoteen;
-    }
+
     //$haku = json_encode($hakukriteerit);
     foreach($hakukriteerit as $x => $x_value) {
         echo "Key=" . $x . ", Value=" . $x_value;
     }
     return $hakukriteerit;
+}
 
-
+function getID(){
+    $id = $_GET['id'];
+    return $id;
 }
 
 function getMetodi(){
@@ -177,15 +177,12 @@ function getMetodi(){
     return $metodi;
 }
 
-function addKirja(){
+function getData(){
     $json = file_get_contents('php://input');
-    $kirja = json_decode($json);
-    return $kirja;
+    $data = json_decode($json);
+    return $data;
 }
 
-function poistettavaKirja(){
-    return $_GET['id'];
-}
 
 //
 //      Pää Metodit
@@ -198,13 +195,17 @@ function poistettavaKirja(){
     } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
         echo $resurssi[0];
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
-        $uusikirja = addKirja();
-    } else if ($metodi=="POST" && $resurssi[0]=="laina"){
-
+        $kirja = getData();
+        $kirjaecho = json_encode($kirja);
+        echo $kirjaecho;
+    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
+        $laina = getData();
+        $lainaecho = json_encode($laina);
+        echo $lainaecho;
+    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
+        $id = getData();
+        echo $id;
     } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
-        $kirja = poistettavaKirja();
-    } else if ($metodi=="DELETE" && $resurssi[0]=="laina"){
-
+        echo "testi";
     }
-*/
-?>
+

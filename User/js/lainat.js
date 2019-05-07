@@ -220,69 +220,66 @@ function  theme() {
 function laina(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto/Server/laina/luo";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
+    // haetaan luotavan lainan tiedot
     let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    let etunimi = document.getElementsByName("etunimi")[0].value;
+    let sukunimi = document.getElementsByName("sukunimi")[0].value;
+    let erapaiva = document.getElementsByName("erapaiva")[0].value;
 
+    let paiva = new Date();
+    let dd = paiva.getDate();
+    let mm = paiva.getMonth()+1;
+    let yyyy = paiva.getFullYear();
 
+    if (dd<10) dd='0'+dd;
+    if (mm<10) mm='0'+mm;
+
+    let paivamaara = yyyy+"-"+mm+"-"+dd;
+
+    let laina = {
+      "id" : id,
+      "etunimi" : etunimi,
+      "sukunimi" : sukunimi,
+      "paivamaara" : paivamaara,
+      "erapaiva" : erapaiva
+    };
+
+    let data = JSON.stringify(laina);
+    console.log(data);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
 
     xml.onreadystatechange = function(){
-        if (xml.readyState == 4 && xml.status == 200) {
+        if (xml.readyState === 4 && xml.status === 200) {
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("GET", url, true);
-    xml.send();
+    xml.open("POST", url, true);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(data);
 
 }
 
 function palauta(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto/Server/testi.php?";
+    let url = "http://localhost:80/Kirjasto/Server/laina/palauta/";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
-
-
+    let id = document.getElementsByName("id")[1].value;
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
 
     xml.onreadystatechange = function(){
-        if (xml.readyState == 4 && xml.status == 200) {
+        if (xml.readyState === 4 && xml.status === 200) {
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("GET", url, true);
-    xml.send();
+    xml.open("POST", url, true);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(id);
 
 }

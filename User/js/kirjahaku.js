@@ -245,10 +245,9 @@ function hae_kirja(){
     url += "&kieli="+kieli;
     let isbn = document.getElementsByName("isbn")[0].value;
     url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    let vuosi = document.getElementsByName("vuosi")[0].value;
+    url += "&vuosi="+vuosi;
+
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
