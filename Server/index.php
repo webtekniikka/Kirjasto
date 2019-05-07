@@ -1,42 +1,71 @@
 <?php
-<<<<<<< HEAD
+
+
 /*
-=======
->>>>>>> origin/qwerty
-$servername = "localhost";
-$username = "";
-$password = "";
-$dbname = "kirjasto";
-<<<<<<< HEAD
-$connection = new mysqli($servername, $username, $password, $dbname);
-=======
+    $servername = "localhost";
+    $username = "ryhma4";
+    $password = "passu";
+    $dbname = "kirjasto";
 
-$connection = new mysqli($servername, $username, $password, $dbname);
+    $connection = new mysqli($servername, $username, $password, $dbname);
 
 
->>>>>>> origin/qwerty
+    // Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+    echo "Connected successfully";
+*/
+
+/*  ei käytössä
+
+
 // Check connection
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 echo "Connected successfully";
-<<<<<<< HEAD
-=======
 
 
->>>>>>> origin/qwerty
+    $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Kustantaja, Julkaisuvuosi, Kirjailija, ISBN, Painos, Kieli, Saatavuus)
+    VALUES (004, 'Testi3', 'OTAVA', 2006, 'Kirjailija_o', '4ANa222', 3, 'Saksa','Kyllä')";
+
+    if ($connection->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $connection->error;
+    }
+    $connection->close();
+}
+
+$connection->close();
+*/
+
+    //Tämä toimii
+    $saatavuus = "Kyllä";
+    $kid = 004;
+    $nimi = "Testi";
+    $kustantaja = "Oma kustanne";
+    $jvuosi = 2002;
+    $kirjailija = "kirjailija";
+    $ISBN = "ABC123ABC";
+    $painos = 1;
+    $kieli = "Ranska";
+
+
+
+
+
 /*
+
 //Haku toimivuus epäselvä
 $stmt = connection->prepare("SELECT * FROM kirat
 WHERE Kirja_id=? or Nimi=? or  kustantaja=? or julkaisuvuosi=? or kirjailija=? or ISBN=? or Painos=? or kieli=? and saatavuus='Kyllä'");
 $stmt->bind_param("ississis", $kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli);
-<<<<<<< HEAD
-$result = $stmt->execute();
-=======
+
 
 $result = $stmt->execute();
 
->>>>>>> origin/qwerty
 if ($result > 0) {
     // output data of each row
     $kirjaArray = array();
@@ -56,38 +85,112 @@ if ($result > 0) {
     echo "0 results";
 }
 $tulosArray = array('numOfRows'=>strval($result->num_rows),'rows'=>$kirjaArray);
-<<<<<<< HEAD
+
 echo json_encode($tulosArray);
 stsmt->close()*/
 //$connection->close();
-=======
 
 
-echo json_encode($tulosArray);
-stsmt->close()*/
+    //Pätkä toimii tarvitsee vielä kimpassa miettii toteutusta haku ei liian sepsifoiva
+    $sql ="SELECT * FROM kirjat
+    WHERE Kirja_Id=? or Nimi=? or  Kustantaja=? or Julkaisuvuosi=? or Kirjailija=? or ISBN=? or Painos=? or Kieli=? and Saatavuus=?";
+   $stmt = $connection->prepare($sql);
+   $stmt->bind_param("issississ", $kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli, $saatavuus);
 
-$connection->close();
+   $boolean =$stmt->execute();
+   $result = $stmt->get_result();
 
->>>>>>> origin/qwerty
+    if ($boolean > 0) {
+        // output data of each row
+        $kirjaArray = array();
+        while($row = $result->fetch_assoc()) {
+            echo '<br />'.$row['Kirja_Id'] . '<br />';
+            echo $row['Nimi'] . '<br />';
+            echo $row['Kustantaja'].'<br />';
+            echo $row['Julkaisuvuosi'].'<br />';
+            echo $row['Kirjailija'].'<br />';
+            echo $row['ISBN'].'<br />';
+            echo $row['Painos'].'<br />';
+            echo $row['Kieli'].'<br />';
+            echo $row['Saatavuus'].'<br />';
+            $kirjaArray[] = $row;
+        }
+    } else {
+        echo '<br />'."0 results";
+    }
+    $tulosArray = array('numOfRows'=>strval($result->num_rows),'rows'=>$kirjaArray);
+
+
+    $jsonArray = json_encode($tulosArray);
+    echo $jsonArray;
+    $stmt->close();
+    $connection->close();
+*/
+
+/*
+   //kirjan lisääminen toimii
+    $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Kustantaja, Julkaisuvuosi, Kirjailija, ISBN, Painos, Kieli, Saatavuus)
+    Values (?,?,?,?,?,?,?,?,?)";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("issississ", $kid, $nimi, $kustantaja, $jvuosi, $kirjailija, $ISBN, $painos, $kieli, $saatavuus);
+    $boolean =$stmt->execute();
+    if($boolean > 0){
+        echo '<br />'."Lisäys fine";
+    }
+    else{
+        echo '<br />'."Jokin meni vikaan";
+    }
+    $stmt->close();
+    $connection->close();
+*/
+
+
+
+
+
+ /*   //Kirjan poistaminen id:llä toimii
+    $sql= "DELETE FROM kirjat WHERE Kirja_Id=?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i",$kid);
+    $boolean =$stmt->execute();
+    if($boolean > 0){
+        echo '<br />'."Poisto onnistui";
+    }
+    else{
+        echo '<br />'."Jokin meni vikaan";
+    }
+    $stmt->close();
+    $connection->close();
+*/
+
 //
 //      Apumetodit
 //
+
+
+
+function getResurssi(){
+    $resurssi_string =$_SERVER['REQUEST_URI'];
+    if (strstr($resurssi_string, '?')) {
+        $resurssi_string = substr($resurssi_string, 0, strpos($resurssi_string, '?'));
+    }
+    $resurssi = explode('/', $resurssi_string);
+
+    for ($i=0;$i<3;$i++){
+        array_shift($resurssi);
+    }
+    return $resurssi;
+}
+
 function getKirjaHakuKriteerit(){
     $nimi = $_GET["nimi"];
     $knimi = $_GET["knimi"];
     $id = $_GET["id"];
     $kieli = $_GET["kieli"];
     $isbn = $_GET["isbn"];
-<<<<<<< HEAD
     $vuosi = $_GET["vuosi"];
     $hakukriteerit = array();
-=======
-    $vuodesta = $_GET["vuodesta"];
-    $vuoteen = $_GET["vuoteen"];
 
-    $hakukriteerit = array();
-
->>>>>>> origin/qwerty
     if (!empty($nimi)){
         $hakukriteerit['nimi'] = $nimi;
     }
@@ -103,60 +206,59 @@ function getKirjaHakuKriteerit(){
     if (!empty($isbn)){
         $hakukriteerit['isbn'] = $isbn;
     }
-<<<<<<< HEAD
     if (!empty($vuosi)){
         $hakukriteerit['vuosi'] = $vuosi;
     }
     $haku = json_encode($hakukriteerit);
-    return $haku;
-}
-=======
-    if (!empty($vuodesta)){
-        $hakukriteerit['vuodesta'] = $vuodesta;
-    }
-    if (!empty($vuoteen)){
-        $hakukriteerit['vuoteen'] = $vuoteen;
+
+
+
+    //$haku = json_encode($hakukriteerit);
+    foreach($hakukriteerit as $x => $x_value) {
+        echo "Key=" . $x . ", Value=" . $x_value;
     }
     return $hakukriteerit;
 }
 
->>>>>>> origin/qwerty
+function getID(){
+    $id = $_GET['id'];
+    return $id;
+}
+
 function getMetodi(){
     $metodi =$_SERVER['REQUEST_METHOD'];
     return $metodi;
 }
-<<<<<<< HEAD
-function addKirja(){
+
+function getData(){
     $json = file_get_contents('php://input');
-    $kirja = json_decode($json);
-    return $kirja;
+    $data = json_decode($json);
+    return $data;
 }
-function poistettavaKirja(){
-    return $_GET['id'];
-}
-//
-//      Pää Metodit
-//
-$metodi = getMetodi();
-if ($metodi=="GET"){
-    $hakukriteerit = getKirjaHakuKriteerit();
-    echo $hakukriteerit;
-    //      $bookList($hakukriteerit);
-} else if ($metodi=="POST"){
-    $uusikirja = addKirja();
-} else if ($metodi=="DELETE") {
-    $kirja = poistettavaKirja();
-}
-=======
+
 
 //
 //      Pää Metodit
 //
     $metodi = getMetodi();
-
-    if ($metodi=="GET"){
-        $hakukriteerit = getKirjaHakuKriteerit();
-        $bookList($hakukriteerit);
+    $resurssi = getResurssi();
+    if ($metodi=="GET" && $resurssi[0]=="kirja") {
+        echo $resurssi[0];
+        $hakukriteerit = getKirjaHakuKriteerit();//       $bookList($hakukriteerit);
+    } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
+        echo $resurssi[0];
+    } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
+        $kirja = getData();
+        $kirjaecho = json_encode($kirja);
+        echo $kirjaecho;
+    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
+        $laina = getData();
+        $lainaecho = json_encode($laina);
+        echo $lainaecho;
+    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
+        $id = getData();
+        echo $id;
+    } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
+        echo "testi";
     }
->>>>>>> origin/qwerty
-?>
+

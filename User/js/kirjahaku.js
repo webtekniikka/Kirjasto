@@ -247,7 +247,8 @@ function  theme() {
 function hae_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto_user/Server/index.php?";
+
+    let url = "http://localhost:80/Kirjasto/Server/kirja/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
@@ -258,18 +259,9 @@ function hae_kirja(){
     let kieli = document.getElementsByName("kieli")[0].value;
     url += "&kieli=" + kieli;
     let isbn = document.getElementsByName("isbn")[0].value;
-<<<<<<< HEAD
     url += "&isbn=" + isbn;
     let vuosi = document.getElementsByName("vuosi")[0].value;
     url += "&vuosi=" + vuosi;
-
-=======
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
->>>>>>> origin/qwerty
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();

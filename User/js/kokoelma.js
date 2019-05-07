@@ -1,4 +1,5 @@
 // KIELET
+
 function new_language() {
     x = document.getElementById("select_language").value;
     if(x === "JPN"){
@@ -249,22 +250,27 @@ function  theme() {
 function lisaa_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto_user/Server/index.php?";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi=" + nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli=" + kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn=" + isbn;
-    let vuosi = document.getElementsByName("vuosi")[0].value;
-    url += "&vuosi=" + vuosi;
+    let url = "http://localhost:80/Kirjasto/Server/kirja/";
 
+    let uusinimi = document.getElementsByName("nimi")[0].value;
+    let uusiknimi = document.getElementsByName("knimi")[0].value;
+    let uusiid = document.getElementsByName("id")[0].value;
+    let uusikieli = document.getElementsByName("kieli")[0].value;
+    let uusiisbn = document.getElementsByName("isbn")[0].value;
+    let uusivuosi = document.getElementsByName("vuosi")[0].value;
 
+    let kirja ={
+        "nimi" : uusinimi,
+        "knimi" : uusiknimi,
+        "id" : uusiid,
+        "kieli" : uusikieli,
+        "isbn" : uusiisbn,
+        "vuosi" : uusivuosi
+    };
+
+    let data =JSON.stringify(kirja);
+    console.log(data);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -274,21 +280,22 @@ function lisaa_kirja(){
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("GET", url, true);
-    xml.send();
+    xml.open("POST", url, true);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(data);
 
 }
 
 function poista_kirja(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto_user/Server/index.php?";
 
-    let id1 = document.getElementsByName("id1")[0].value;
-    url += "&id1=" + id1;
+    let url = "http://localhost:80/Kirjasto/Server/kirja/";
 
+    let id = document.getElementsByName('id1')[0].value;
 
-
+    console.log(id);
+    url += "?id="+id;
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -298,7 +305,7 @@ function poista_kirja(){
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("GET", url, true);
+    xml.open("DELETE", url, true);
     xml.send();
 
 }
