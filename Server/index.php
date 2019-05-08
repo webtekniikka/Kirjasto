@@ -50,6 +50,7 @@ echo "Connected successfully";
 
 /*
 
+
     //Pätkä toimii tarvitsee vielä kimpassa miettii toteutusta haku ei liian sepsifoiva
     $sql ="SELECT * FROM kirjat
     WHERE Kirja_Id=? or Nimi=? or Julkaisuvuosi=? or Kirjailija=? or ISBN=? or Kieli=?";
@@ -162,29 +163,15 @@ function getKirjaHakuKriteerit(){
     $vuosi = $_GET["vuosi"];
     $hakukriteerit = array();
 
-    if (!empty($nimi)){
         $hakukriteerit['nimi'] = $nimi;
-    }
-    if (!empty($knimi)) {
         $hakukriteerit['knimi'] = $knimi;
-    }
-    if (!empty($id)){
         $hakukriteerit['id'] = $id;
-    }
-    if (!empty($kieli)){
         $hakukriteerit['kieli'] = $kieli;
-    }
-    if (!empty($isbn)){
         $hakukriteerit['isbn'] = $isbn;
-    }
-    if (!empty($vuosi)){
         $hakukriteerit['vuosi'] = $vuosi;
-    }
-    $haku = json_encode($hakukriteerit);
 
-
-
-    //$haku = json_encode($hakukriteerit);
+    $testi = json_encode($hakukriteerit);
+    echo $testi;
     foreach($hakukriteerit as $x => $x_value) {
         echo "Key=" . $x . ", Value=" . $x_value;
     }
@@ -214,8 +201,8 @@ function getData(){
     $metodi = getMetodi();
     $resurssi = getResurssi();
     if ($metodi=="GET" && $resurssi[0]=="kirja") {
-        echo $resurssi[0];
-        $hakukriteerit = getKirjaHakuKriteerit();//       $bookList($hakukriteerit);
+        $hakukriteerit = getKirjaHakuKriteerit();//
+        //       $bookList($hakukriteerit);
     } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
         echo $resurssi[0];
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
@@ -226,7 +213,7 @@ function getData(){
         $laina = getData();
         $lainaecho = json_encode($laina);
         echo $lainaecho;
-    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
+    } else if ($metodi=="PUT" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
         $id = getData();
         echo $id;
     } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
