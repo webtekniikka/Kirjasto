@@ -267,7 +267,7 @@ function lisaa_kirja(){
     // Luodaan url
 
 
-    let url = "http://localhost:80/Kirjasto/Server/kirja/";
+    let url = "http://localhost:80/Kirjasto_user/Server/kirja/";
 
 
     let uusinimi = document.getElementsByName("nimi")[0].value;
