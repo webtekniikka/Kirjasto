@@ -248,32 +248,11 @@ function  theme() {
 }
 
 // HAUT
-function hae_laina(){
+function hae_lainat(){
 
     // Luodaan url
 
-
-    let url = "http://localhost:80/Kirjasto_user/Server/lainat/";
-/*
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi=" + nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli=" + kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn=" + isbn;
-    let vuosi = document.getElementsByName("vuosi")[0].value;
-    url += "&vuosi=" + vuosi;
-    let erapaiva = document.getElementsByName("erapaiva")[0].value;
-    url += "&erapaiva=" + erapaiva;
-
-
-*/
-
-
+    let url = "http://localhost:80/Kirjasto/Server/lainassa/";
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -286,4 +265,49 @@ function hae_laina(){
     xml.open("GET", url, true);
     xml.send();
 
+}
+
+function hae_lainahistoria() {
+
+    let url = "http://localhost:80/Kirjasto/Server/lainassa/historia/";
+
+    // tehdään XMLrequest ja lähetetään se
+    let xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function () {
+        if (xml.readyState === 4 && xml.status === 200) {
+            let vastaus = xml.responseText;
+            let json = JSON.parse(vastaus);
+
+            for (let i = 0; i < json.length; i++) {
+                let tiedot = [
+                    json[i].Kirja_Id,
+                    json[i].Nimi,
+                    json[i].Lainaaja_etunimi,
+                    json[i].Lainaaja_sukunimi,
+                    json[i].Lainaus_pvm,
+                    json[i].Viimeinen_pvm,
+                    json[i].Palautus_pvm
+                ];
+
+                console.log(tiedot);
+
+
+                //Luodaan taulukon rivi
+
+                let rivi = document.createElement("tr");
+                for (let j = 0; j < tiedot.length; j++) {
+                    let solu = document.createElement("td");
+                    solu.innerHTML = tiedot[j];
+                    rivi.appendChild(solu);
+                }
+
+                document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+                document.getElementById("hakutulos").style.display = 'block';
+            }
+        }
+        xml.open("GET", url, true);
+        xml.send();
+
+    }
 }
