@@ -253,7 +253,7 @@ function hae_laina(){
     // Luodaan url
 
 
-    let url = "http://localhost:80/Kirjasto_user/Server/lainat/";
+    let url = "http://localhost:80/Kirjasto/Server/lainat/";
 /*
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
