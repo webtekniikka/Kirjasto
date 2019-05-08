@@ -8,10 +8,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>-->
 </head>
 
 <body id="body_of_page">
+
 <!-- Navigaatio -->
 <ul id="navigation">
     <li><a id="i" href="kirjahaku.html">Kirjahaku</a></li>
@@ -22,21 +23,23 @@
 
 <!-- Kielet -->
 <span>
+    <label for="select_language"></label>
     <select id="select_language" onchange="new_language()">
         <option value="ENG" name="ENG">ENGLISH</option>
         <option value="JPN" name="JPN">日本語</option>
         <option value="RUS" name="RUS">РУССКИЙ</option>
-        <option value="FIN" name="FIN">SUOMI</option>
+        <option value="FIN" name="FIN" selected>SUOMI</option>
         <option value="SWE" name="SWE">SVENSKA</option>
     </select>
 </span>
 
 <!-- Teemat -->
 <span>
+    <label for="select_theme"></label>
     <select id="select_theme" onchange="new_theme()">
-        <option value="t1" name="t1">Theme 1</option>
-        <option value="t2" name="t2">Theme 2</option>
-        <option value="t3" name="t3">Theme 3</option>
+        <option id="v" value="t1" name="t1">Teema 1</option>
+        <option id="vi" value="t2" name="t2">Teema 2</option>
+        <option id="vii" value="t3" name="t3">Teema 3</option>
     </select>
 </span>
 
@@ -67,7 +70,7 @@
                                      oninvalid="this.setCustomValidity('Invalid ISBN')"/>
             </div>
             <div>
-                <p id="8">Julkaisuvuosi:</p> <input type="number" name="vuosi" placeholder=" Vuosi (4 dig)"
+                <p id="8">Julkaisuvuosi:</p> <input type="number" name="vuosi" min="1" placeholder=" Vuosi (4 dig)"
                                  pattern="[0-9]{4}"
                                  oninvalid="this.setCustomValidity('Invalid year')"/>
             </div>

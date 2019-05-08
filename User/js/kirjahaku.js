@@ -68,16 +68,16 @@ function language() {
         document.getElementById("9").value = "Submit";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "ENG");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "JPN"){
         document.getElementById("i").innerHTML = "書籍検索";
         document.getElementById("ii").innerHTML = "貸出検索";
         document.getElementById("iii").innerHTML = "貸出";
         document.getElementById("iv").innerHTML = "本の収集";
-        document.getElementById("v").innerHTML = "Theme 1";
-        document.getElementById("vi").innerHTML = "Theme 2";
-        document.getElementById("vii").innerHTML = "Theme 3";
+        document.getElementById("v").innerHTML = "テーマ 1";
+        document.getElementById("vi").innerHTML = "テーマ 2";
+        document.getElementById("vii").innerHTML = "テーマ 3";
         document.getElementById("1").innerHTML = "書籍検索";
         document.getElementById("2").innerHTML = "本を探す";
         document.getElementById("3").innerHTML = "書籍名:";
@@ -93,7 +93,7 @@ function language() {
         document.getElementById("9").value = "送信";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "JPN");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "RUS"){
         document.getElementById("i").innerHTML = "Поиск книги";
@@ -118,7 +118,7 @@ function language() {
         document.getElementById("9").value = "Отправить";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "RUS");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "FIN"){
         document.getElementById("i").innerHTML = "Kirjahaku";
@@ -143,7 +143,7 @@ function language() {
         document.getElementById("9").value = "Lähetä";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "FIN");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "SWE"){
         document.getElementById("i").innerHTML = "Kirjahaku";
@@ -168,7 +168,7 @@ function language() {
         document.getElementById("9").value = "Lähetä";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "SWE");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
 }
 
@@ -209,7 +209,7 @@ function  theme() {
         document.getElementById("hakutulos").style.color = "black";//uusi
         // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t1");
-        let y = localStorage.getItem("number");
+        //let y = localStorage.getItem("number");
     }
     else if(y === "t2"){
         document.getElementById("body_of_page").style.backgroundColor = "white";
@@ -224,7 +224,7 @@ function  theme() {
         document.getElementById("hakutulos").style.color = "black";//uusi
         // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t2");
-        let y = localStorage.getItem("number");
+        //let y = localStorage.getItem("number");
     }
     else if(y === "t3"){
         document.getElementById("body_of_page").style.backgroundColor = "black";
@@ -239,7 +239,7 @@ function  theme() {
         document.getElementById("hakutulos").style.color = "white";//uusi
         // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t3");
-        let y = localStorage.getItem("number");
+        //let y = localStorage.getItem("number");
     }
 }
 
@@ -248,7 +248,9 @@ function hae_kirja(){
 
     // Luodaan url
 
+
     let url = "http://localhost:80/Kirjasto/Server/kirja/?";
+
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
