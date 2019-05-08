@@ -284,29 +284,21 @@ function hae_kirja(){
                     json[i].Saatavuus
                 ];
 
-                id = json[i].Kirja_Id;
-                nimi = json[i].Nimi;
-                knimi = json[i].Kirjailija;
-                vuosi = json[i].Julkaisuvuosi;
-                kieli = json[i].Kieli;
-                isbn = json[i].ISBN;
-                let saatavuus = json[i].Saatavuus;
+                console.log(tiedot);
+
 
                 //Luodaan taulukon rivi
 
                 let rivi = document.createElement("tr");
                 for (let j=0;j<tiedot.length;j++){
                     let solu = document.createElement("td");
-                    solu.innerHTML = tiedot[i];
+                    solu.innerHTML = tiedot[j];
                     rivi.appendChild(solu);
                 }
 
-                let taulukko = document.getElementsByTagName("TBODY");
-                taulukko.appendChild(rivi);
-
+                document.getElementsByTagName("TBODY")[0].appendChild(rivi);
                 document.getElementById("hakutulos").style.display = 'block';
 
-                console.log(id + " " +nimi+ " "+knimi+" "+vuosi+" "+kieli+" "+isbn+" "+saatavuus);
             }
 
         }
