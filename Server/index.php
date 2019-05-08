@@ -135,7 +135,7 @@ function addKirja($data){
 
 }
 
-/*
+
    //Kirjan poistaminen id:llä toimii
     function poistaKirja($para){
         $servername = "localhost";
@@ -165,14 +165,11 @@ function addKirja($data){
         $stmt->close();
         $connection->close();
     }
-    */
+
 
 //
 //      Apumetodit
 //
-
-
-
 function getResurssi(){
     $resurssi_string =$_SERVER['REQUEST_URI'];
     if (strstr($resurssi_string, '?')) {
@@ -244,7 +241,8 @@ function getData(){
         $id = getData();
         echo $id;
     } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
-        echo "testi";
+        $id = getID();
+        poistaKirja($id);
     }
 
 
