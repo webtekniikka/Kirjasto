@@ -50,6 +50,9 @@ function language() {
         document.getElementById("ii").innerHTML = "Loan search";
         document.getElementById("iii").innerHTML = "Loans";
         document.getElementById("iv").innerHTML = "Collection";
+        document.getElementById("v").innerHTML = "Theme 1";
+        document.getElementById("vi").innerHTML = "Theme 2";
+        document.getElementById("vii").innerHTML = "Theme 3";
         document.getElementById("1").innerHTML = "Loan search";
         document.getElementById("2").innerHTML = "Search for loan";
         document.getElementById("3").innerHTML = "Book's title:";
@@ -66,13 +69,16 @@ function language() {
         document.getElementById("10").value = "Submit";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "ENG");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "JPN"){
         document.getElementById("i").innerHTML = "書籍検索";
         document.getElementById("ii").innerHTML = "貸出検索";
         document.getElementById("iii").innerHTML = "貸出";
         document.getElementById("iv").innerHTML = "本の収集";
+        document.getElementById("v").innerHTML = "テーマ 1";
+        document.getElementById("vi").innerHTML = "テーマ 2";
+        document.getElementById("vii").innerHTML = "テーマ 3";
         document.getElementById("1").innerHTML = "貸出検索";
         document.getElementById("2").innerHTML = "貸出を探す";
         document.getElementById("3").innerHTML = "書籍名:";
@@ -89,13 +95,16 @@ function language() {
         document.getElementById("10").value = "送信";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "JPN");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "RUS"){
         document.getElementById("i").innerHTML = "Поиск книги";
         document.getElementById("ii").innerHTML = "Поиск выдач";
         document.getElementById("iii").innerHTML = "Выдачи";
         document.getElementById("iv").innerHTML = "Фонд";
+        document.getElementById("v").innerHTML = "Тема 1";
+        document.getElementById("vi").innerHTML = "Тема 2";
+        document.getElementById("vii").innerHTML = "Тема 3";
         document.getElementById("1").innerHTML = "Поиск выдач";
         document.getElementById("2").innerHTML = "Найти выдачу";
         document.getElementById("3").innerHTML = "Название:";
@@ -112,13 +121,16 @@ function language() {
         document.getElementById("10").value = "Отправить";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "RUS");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "FIN"){
         document.getElementById("i").innerHTML = "Kirjahaku";
         document.getElementById("ii").innerHTML = "Lainahaku";
         document.getElementById("iii").innerHTML = "Lainat";
         document.getElementById("iv").innerHTML = "Kokoelma";
+        document.getElementById("v").innerHTML = "Teema 1";
+        document.getElementById("vi").innerHTML = "Teema 2";
+        document.getElementById("vii").innerHTML = "Teema 3";
         document.getElementById("1").innerHTML = "Lainahaku";
         document.getElementById("2").innerHTML = "Hae laina";
         document.getElementById("3").innerHTML = "Teoksen nimi:";
@@ -135,13 +147,16 @@ function language() {
         document.getElementById("10").value = "Lähetä";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "FIN");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
     else if(x === "SWE"){
         document.getElementById("i").innerHTML = "Kirjahaku";
         document.getElementById("ii").innerHTML = "Lainahaku";
         document.getElementById("iii").innerHTML = "Lainat";
         document.getElementById("iv").innerHTML = "Kokoelma";
+        document.getElementById("v").innerHTML = "Teema 1";
+        document.getElementById("vi").innerHTML = "Teema 2";
+        document.getElementById("vii").innerHTML = "Teema 3";
         document.getElementById("1").innerHTML = "Lainahaku";
         document.getElementById("2").innerHTML = "Hae laina";
         document.getElementById("3").innerHTML = "Teoksen nimi:";
@@ -153,12 +168,12 @@ function language() {
         document.getElementsByName('kieli')[0].placeholder = " Kieli";
         document.getElementById("7").innerHTML = "Teoksen ISBN:";
         document.getElementById("8").innerHTML = "Julkaisuvuosi:";
-        document.getElementsByName('vuodesta')[0].placeholder = " Vuosi (4 dig)";
+        document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
         document.getElementById("9").innerHTML = "Eräpäivä:";
         document.getElementById("10").value = "Lähetä";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "SWE");
-        let x = localStorage.getItem("abbreviation");
+        //let x = localStorage.getItem("abbreviation");
     }
 }
 
@@ -198,7 +213,7 @@ function  theme() {
         document.getElementById("hakutulos").style.color = "black";//uusi
         // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t1");
-        let y = localStorage.getItem("number");
+        //let y = localStorage.getItem("number");
     }
     else if(y === "t2"){
         document.getElementById("body_of_page").style.backgroundColor = "white";
@@ -213,7 +228,7 @@ function  theme() {
         document.getElementById("hakutulos").style.color = "black";//uusi
         // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t2");
-        let y = localStorage.getItem("number");
+        //let y = localStorage.getItem("number");
     }
     else if(y === "t3"){
         document.getElementById("body_of_page").style.backgroundColor = "black";
@@ -228,7 +243,7 @@ function  theme() {
         document.getElementById("hakutulos").style.color = "white";//uusi
         // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t3");
-        let y = localStorage.getItem("number");
+        //let y = localStorage.getItem("number");
     }
 }
 
@@ -236,22 +251,24 @@ function  theme() {
 function hae_laina(){
 
     // Luodaan url
-    let url = "http://localhost:80/Kirjasto_user/Server/index.php?";
 
-    let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi=" + nimi;
-    let knimi = document.getElementsByName("knimi")[0].value;
-    url += "&knimi=" + knimi;
-    let id = document.getElementsByName("id")[0].value;
-    url += "&id=" + id;
-    let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli=" + kieli;
-    let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn=" + isbn;
-    let vuosi = document.getElementsByName("vuosi")[0].value;
-    url += "&vuosi=" + vuosi;
-    let erapaiva = document.getElementsByName("erapaiva")[0].value;
-    url += "&erapaiva=" + erapaiva;
+    let url = "http://localhost:80/Kirjasto_user/Server/lainat/";
+    /*
+        let nimi = document.getElementsByName("nimi")[0].value;
+        url += "nimi=" + nimi;
+        let knimi = document.getElementsByName("knimi")[0].value;
+        url += "&knimi=" + knimi;
+        let id = document.getElementsByName("id")[0].value;
+        url += "&id=" + id;
+        let kieli = document.getElementsByName("kieli")[0].value;
+        url += "&kieli=" + kieli;
+        let isbn = document.getElementsByName("isbn")[0].value;
+        url += "&isbn=" + isbn;
+        let vuosi = document.getElementsByName("vuosi")[0].value;
+        url += "&vuosi=" + vuosi;
+        let erapaiva = document.getElementsByName("erapaiva")[0].value;
+        url += "&erapaiva=" + erapaiva;
+    */
 
 
 
