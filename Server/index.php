@@ -1,16 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "ryhma4";
-$password = "passu";
-$dbname = "kirjasto";
 
-$connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-}
-echo "Connected successfully";
 
 
 /*  ei käytössä
@@ -36,7 +25,7 @@ echo "Connected successfully";
 
 */
 
-    //Tämä toimii
+  /*  //Tämä toimii
     $saatavuus = "Saatavilla";
     $kid = 005;
     $nimi = "Testi";
@@ -44,64 +33,107 @@ echo "Connected successfully";
     $kirjailija = "kirjailija";
     $ISBN = "ABC123ABC";
     $kieli = null;
+*/
 
 
 
 
-/*
 
+function kirjaHaku($haku)
+{
+    $servername = "localhost";
+    $username = "ryhma4";
+    $password = "passu";
+    $dbname = "kirjasto";
+
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+    $kid = $haku['id'];
+    $nimi = $haku['nimi'];
+    $jvuosi = $haku['vuosi'];
+    $kirjailija = $haku['knimi'];
+    $ISBN = $haku['isbn'];
+    $kieli = $haku['kieli'];
 
     //Pätkä toimii tarvitsee vielä kimpassa miettii toteutusta haku ei liian sepsifoiva
-    $sql ="SELECT * FROM kirjat
+    $sql = "SELECT * FROM kirjat
     WHERE Kirja_Id=? or Nimi=? or Julkaisuvuosi=? or Kirjailija=? or ISBN=? or Kieli=?";
-   $stmt = $connection->prepare($sql);
-   $stmt->bind_param("isisss", $kid, $nimi, $jvuosi, $kirjailija, $ISBN, $kieli);
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("isisss", $kid, $nimi, $jvuosi, $kirjailija, $ISBN, $kieli);
 
-   $boolean =$stmt->execute();
-   $result = $stmt->get_result();
+    $boolean = $stmt->execute();
+    $result = $stmt->get_result();
 
     $kirjaArray = array();
     if ($boolean > 0) {
         // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo'<br />'.$row['Kirja_Id'] . ' ';
+        while ($row = $result->fetch_assoc()) {
+       /*     echo '<br />' . $row['Kirja_Id'] . ' ';
             echo $row['Nimi'] . ' ';
-            echo $row['Julkaisuvuosi'].' ';
-            echo $row['Kirjailija'].' ';
-            echo $row['ISBN'].' ';
-            echo $row['Kieli'].' ';
-            echo $row['Saatavuus'].' ';
+            echo $row['Julkaisuvuosi'] . ' ';
+            echo $row['Kirjailija'] . ' ';
+            echo $row['ISBN'] . ' ';
+            echo $row['Kieli'] . ' ';
+            echo $row['Saatavuus'] . ' ';
+       */
             $kirjaArray[] = $row;
             //echo '<br />'.$kirjaArray[] = json_encode($row).'<br />';
         }
     } else {
-        echo '<br />'."0 results";
+        echo '<br />' . "0 results";
     }
     $json_lista = json_encode($kirjaArray);
-    echo '<br />'.$json_lista;
-    //echo json_encode($kirjaArray);
+    echo $json_lista;
 
     $stmt->close();
     $connection->close();
-*/
+}
 
    //kirjan lisääminen toimii
+
+function addKirja($data){
+
+    $servername = "localhost";
+    $username = "ryhma4";
+    $password = "passu";
+    $dbname = "kirjasto";
+
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+    $kid = $data['id'];
+    $nimi = $data['nimi'];
+    $jvuosi = $data['vuosi'];
+    $kirjailija = $data['knimi'];
+    $ISBN = $data['isbn'];
+    $kieli = $data['kieli'];
+    $saatavuus = 'Saatavilla';
+
+    echo $kid;
+
     $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Julkaisuvuosi, Kirjailija, ISBN, Kieli, Saatavuus)
     Values (?,?,?,?,?,?,?)";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("isissss", $kid, $nimi, $jvuosi, $kirjailija, $ISBN, $kieli, $saatavuus);
-    $boolean =$stmt->execute();
-    if($boolean > 0){
-        echo '<br />'."Lisäys fine";
-    }
-    else{
-        echo '<br />'."Jokin meni vikaan";
+    $boolean = $stmt->execute();
+    if ($boolean > 0) {
+        echo '<br />' . "Lisäys fine";
+    } else {
+        echo '<br />' . "Jokin meni vikaan";
     }
     $stmt->close();
     $connection->close();
 
-
-
+}
 
 /*
    //Kirjan poistaminen id:llä toimii
@@ -161,6 +193,7 @@ function getKirjaHakuKriteerit(){
     $kieli = $_GET["kieli"];
     $isbn = $_GET["isbn"];
     $vuosi = $_GET["vuosi"];
+
     $hakukriteerit = array();
 
         $hakukriteerit['nimi'] = $nimi;
@@ -170,11 +203,6 @@ function getKirjaHakuKriteerit(){
         $hakukriteerit['isbn'] = $isbn;
         $hakukriteerit['vuosi'] = $vuosi;
 
-    $testi = json_encode($hakukriteerit);
-    echo $testi;
-    foreach($hakukriteerit as $x => $x_value) {
-        echo "Key=" . $x . ", Value=" . $x_value;
-    }
     return $hakukriteerit;
 }
 
@@ -190,7 +218,7 @@ function getMetodi(){
 
 function getData(){
     $json = file_get_contents('php://input');
-    $data = json_decode($json);
+    $data = json_decode($json, true);
     return $data;
 }
 
@@ -202,13 +230,12 @@ function getData(){
     $resurssi = getResurssi();
     if ($metodi=="GET" && $resurssi[0]=="kirja") {
         $hakukriteerit = getKirjaHakuKriteerit();//
-        //       $bookList($hakukriteerit);
+        kirjaHaku($hakukriteerit);
     } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
         echo $resurssi[0];
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $kirja = getData();
-        $kirjaecho = json_encode($kirja);
-        echo $kirjaecho;
+        addKirja($kirja);
     } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
         $laina = getData();
         $lainaecho = json_encode($laina);
