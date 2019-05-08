@@ -268,7 +268,21 @@ function hae_kirja(){
 
     xml.onreadystatechange = function(){
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+            let vastaus = xml.responseText;
+            let json = JSON.parse(vastaus);
+
+            for (let i=0;i<json.length;i++){
+                id = json[i].Kirja_Id;
+                nimi = json[i].Nimi;
+                knimi = json[i].Kirjailija;
+                vuosi = json[i].Julkaisuvuosi;
+                kieli = json[i].Kieli;
+                isbn = json[i].ISBN
+                let saatavuus = json[i].Saatavuus;
+
+                console.log(id + " " +nimi+ " "+knimi+" "+vuosi+" "+kieli+" "+isbn+" "+saatavuus);
+            }
+
         }
     };
     xml.open("GET", url, true);
