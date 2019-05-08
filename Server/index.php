@@ -228,15 +228,16 @@ function getData(){
     if ($metodi=="GET" && $resurssi[0]=="kirja") {
         $hakukriteerit = getKirjaHakuKriteerit();//
         kirjaHaku($hakukriteerit);
-    } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
-        echo $resurssi[0];
+    } else if ($metodi=="GET" && $resurssi[0]=="lainassa" && $resurssi[1]=="historia"){
+        echo $resurssi[1];
+    } else if ($metodi=="GET" && $resurssi[0]=="lainassa"){
+        echo "testilainat";
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $kirja = getData();
         addKirja($kirja);
     } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
         $laina = getData();
-        $lainaecho = json_encode($laina);
-        echo $lainaecho;
+
     } else if ($metodi=="PUT" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
         $id = getData();
         echo $id;
