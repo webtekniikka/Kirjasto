@@ -279,7 +279,7 @@ function palauta(){
 
     let url = "http://localhost:80/Kirjasto/Server/laina/palauta/";
 
-    let id = document.getElementsByName("id")[1].value;
+    let id = document.getElementsByName("id1")[0].value;
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -289,7 +289,7 @@ function palauta(){
             document.getElementById("hakutulos").innerHTML = xml.responseText;
         }
     };
-    xml.open("POST", url, true);
+    xml.open("PUT", url, true);
     xml.setRequestHeader("Content-Type", "application/json");
     xml.send(id);
 
