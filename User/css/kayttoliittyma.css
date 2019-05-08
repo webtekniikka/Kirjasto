@@ -77,3 +77,8 @@ li a:hover{
     max-height: 19px;
     margin-right: 10px;
 }
+
+/*tulokset*/
+#hakutulos{
+    display: none;
+}
