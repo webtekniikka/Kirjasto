@@ -249,7 +249,7 @@ function hae_kirja(){
     // Luodaan url
 
 
-    let url = "http://localhost:80/Kirjasto_user/Server/kirja/?";
+    let url = "http://localhost:80/Kirjasto/Server/kirja/?";
 
 
     let nimi = document.getElementsByName("nimi")[0].value;
@@ -274,13 +274,37 @@ function hae_kirja(){
             let json = JSON.parse(vastaus);
 
             for (let i=0;i<json.length;i++){
+                let tiedot = [
+                    json[i].Kirja_Id,
+                    json[i].Nimi,
+                    json[i].Kirjailija,
+                    json[i].Julkaisuvuosi,
+                    json[i].Kieli,
+                    json[i].ISBN,
+                    json[i].Saatavuus
+                ];
+
                 id = json[i].Kirja_Id;
                 nimi = json[i].Nimi;
                 knimi = json[i].Kirjailija;
                 vuosi = json[i].Julkaisuvuosi;
                 kieli = json[i].Kieli;
-                isbn = json[i].ISBN
+                isbn = json[i].ISBN;
                 let saatavuus = json[i].Saatavuus;
+
+                //Luodaan taulukon rivi
+
+                let rivi = document.createElement("tr");
+                for (let j=0;j<tiedot.length;j++){
+                    let solu = document.createElement("td");
+                    solu.innerHTML = tiedot[i];
+                    rivi.appendChild(solu);
+                }
+
+                let taulukko = document.getElementsByTagName("TBODY");
+                taulukko.appendChild(rivi);
+
+                document.getElementById("hakutulos").style.display = 'block';
 
                 console.log(id + " " +nimi+ " "+knimi+" "+vuosi+" "+kieli+" "+isbn+" "+saatavuus);
             }
