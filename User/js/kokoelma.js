@@ -1,4 +1,5 @@
 // KIELET
+
 function new_language() {
     x = document.getElementById("select_language").value;
     if(x === "JPN"){
@@ -265,7 +266,9 @@ function lisaa_kirja(){
 
     // Luodaan url
 
-    let url = "http://localhost:80/Kirjasto_user/Server/kirja/";
+
+    let url = "http://localhost:80/Kirjasto/Server/kirja/";
+
 
     let uusinimi = document.getElementsByName("nimi")[0].value;
     let uusiknimi = document.getElementsByName("knimi")[0].value;

@@ -252,23 +252,26 @@ function hae_laina(){
 
     // Luodaan url
 
-    let url = "http://localhost:80/Kirjasto_user/Server/lainat/";
-    /*
-        let nimi = document.getElementsByName("nimi")[0].value;
-        url += "nimi=" + nimi;
-        let knimi = document.getElementsByName("knimi")[0].value;
-        url += "&knimi=" + knimi;
-        let id = document.getElementsByName("id")[0].value;
-        url += "&id=" + id;
-        let kieli = document.getElementsByName("kieli")[0].value;
-        url += "&kieli=" + kieli;
-        let isbn = document.getElementsByName("isbn")[0].value;
-        url += "&isbn=" + isbn;
-        let vuosi = document.getElementsByName("vuosi")[0].value;
-        url += "&vuosi=" + vuosi;
-        let erapaiva = document.getElementsByName("erapaiva")[0].value;
-        url += "&erapaiva=" + erapaiva;
-    */
+
+    let url = "http://localhost:80/Kirjasto/Server/lainat/";
+/*
+    let nimi = document.getElementsByName("nimi")[0].value;
+    url += "nimi=" + nimi;
+    let knimi = document.getElementsByName("knimi")[0].value;
+    url += "&knimi=" + knimi;
+    let id = document.getElementsByName("id")[0].value;
+    url += "&id=" + id;
+    let kieli = document.getElementsByName("kieli")[0].value;
+    url += "&kieli=" + kieli;
+    let isbn = document.getElementsByName("isbn")[0].value;
+    url += "&isbn=" + isbn;
+    let vuosi = document.getElementsByName("vuosi")[0].value;
+    url += "&vuosi=" + vuosi;
+    let erapaiva = document.getElementsByName("erapaiva")[0].value;
+    url += "&erapaiva=" + erapaiva;
+
+
+*/
 
 
 
