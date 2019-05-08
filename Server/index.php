@@ -15,6 +15,14 @@ echo "Connected successfully";
 
 /*  ei käytössä
 
+
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+echo "Connected successfully";
+
+
     $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Kustantaja, Julkaisuvuosi, Kirjailija, ISBN, Painos, Kieli, Saatavuus)
     VALUES (004, 'Testi3', 'OTAVA', 2006, 'Kirjailija_o', '4ANa222', 3, 'Saksa','Kyllä')";
 
@@ -36,6 +44,8 @@ echo "Connected successfully";
     $kirjailija = "kirjailija";
     $ISBN = "ABC123ABC";
     $kieli = null;
+
+
 
 
 /*
@@ -69,6 +79,7 @@ echo "Connected successfully";
     $json_lista = json_encode($kirjaArray);
     echo '<br />'.$json_lista;
     //echo json_encode($kirjaArray);
+
     $stmt->close();
     $connection->close();
 */
@@ -87,6 +98,7 @@ echo "Connected successfully";
     }
     $stmt->close();
     $connection->close();
+
 
 
 
@@ -121,6 +133,7 @@ echo "Connected successfully";
         $connection->close();
     }
     */
+
 //
 //      Apumetodit
 //
@@ -146,9 +159,7 @@ function getKirjaHakuKriteerit(){
     $id = $_GET["id"];
     $kieli = $_GET["kieli"];
     $isbn = $_GET["isbn"];
-    $vuodesta = $_GET["vuodesta"];
-    $vuoteen = $_GET["vuoteen"];
-
+    $vuosi = $_GET["vuosi"];
     $hakukriteerit = array();
 
     if (!empty($nimi)){
@@ -166,19 +177,23 @@ function getKirjaHakuKriteerit(){
     if (!empty($isbn)){
         $hakukriteerit['isbn'] = $isbn;
     }
-    if (!empty($vuodesta)){
-        $hakukriteerit['vuodesta'] = $vuodesta;
+    if (!empty($vuosi)){
+        $hakukriteerit['vuosi'] = $vuosi;
     }
-    if (!empty($vuoteen)){
-        $hakukriteerit['vuoteen'] = $vuoteen;
-    }
+    $haku = json_encode($hakukriteerit);
+
+
+
     //$haku = json_encode($hakukriteerit);
     foreach($hakukriteerit as $x => $x_value) {
         echo "Key=" . $x . ", Value=" . $x_value;
     }
     return $hakukriteerit;
+}
 
-
+function getID(){
+    $id = $_GET['id'];
+    return $id;
 }
 
 function getMetodi(){
@@ -186,28 +201,36 @@ function getMetodi(){
     return $metodi;
 }
 
-function addKirja(){
+function getData(){
     $json = file_get_contents('php://input');
-    $kirja = json_decode($json);
-    return $kirja;
+    $data = json_decode($json);
+    return $data;
 }
 
-function poistettavaKirja(){
-    return $_GET['id'];
-}
 
 //
 //      Pää Metodit
 //
     $metodi = getMetodi();
     $resurssi = getResurssi();
-    if ($metodi=="GET" && $resurssi[0]=="kirja"){
+    if ($metodi=="GET" && $resurssi[0]=="kirja") {
         echo $resurssi[0];
         $hakukriteerit = getKirjaHakuKriteerit();//       $bookList($hakukriteerit);
-    } else if ($metodi=="POST"){
-        $uusikirja = addKirja();
-    } else if ($metodi=="DELETE") {
-        $kirja = poistettavaKirja();
+    } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
+        echo $resurssi[0];
+    } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
+        $kirja = getData();
+        $kirjaecho = json_encode($kirja);
+        echo $kirjaecho;
+    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
+        $laina = getData();
+        $lainaecho = json_encode($laina);
+        echo $lainaecho;
+    } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
+        $id = getData();
+        echo $id;
+    } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
+        echo "testi";
     }
 
-?>
+

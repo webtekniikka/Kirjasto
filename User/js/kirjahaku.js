@@ -50,6 +50,9 @@ function language() {
         document.getElementById("ii").innerHTML = "Loan search";
         document.getElementById("iii").innerHTML = "Loans";
         document.getElementById("iv").innerHTML = "Collection";
+        document.getElementById("v").innerHTML = "Theme 1";
+        document.getElementById("vi").innerHTML = "Theme 2";
+        document.getElementById("vii").innerHTML = "Theme 3";
         document.getElementById("1").innerHTML = "Book search";
         document.getElementById("2").innerHTML = "Search for book";
         document.getElementById("3").innerHTML = "Book's title:";
@@ -60,11 +63,9 @@ function language() {
         document.getElementById("6").innerHTML = "Book's language:";
         document.getElementsByName('kieli')[0].placeholder = " Language";
         document.getElementById("7").innerHTML = "Book's ISBN:";
-        document.getElementById("8").innerHTML = "From year:";
-        document.getElementsByName('vuodesta')[0].placeholder = "  Year (4 dig)";
-        document.getElementById("9").innerHTML = "To year:";
-        document.getElementsByName('vuoteen')[0].placeholder = "  Year (4 dig)";
-        document.getElementById("10").value = "Submit";
+        document.getElementById("8").innerHTML = "Published:";
+        document.getElementsByName('vuosi')[0].placeholder = " Year (4 dig)";
+        document.getElementById("9").value = "Submit";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "ENG");
         let x = localStorage.getItem("abbreviation");
@@ -74,6 +75,9 @@ function language() {
         document.getElementById("ii").innerHTML = "貸出検索";
         document.getElementById("iii").innerHTML = "貸出";
         document.getElementById("iv").innerHTML = "本の収集";
+        document.getElementById("v").innerHTML = "Theme 1";
+        document.getElementById("vi").innerHTML = "Theme 2";
+        document.getElementById("vii").innerHTML = "Theme 3";
         document.getElementById("1").innerHTML = "書籍検索";
         document.getElementById("2").innerHTML = "本を探す";
         document.getElementById("3").innerHTML = "書籍名:";
@@ -84,11 +88,9 @@ function language() {
         document.getElementById("6").innerHTML = "言語:";
         document.getElementsByName('kieli')[0].placeholder = " 言語";
         document.getElementById("7").innerHTML = "本のISBN:";
-        document.getElementById("8").innerHTML = "年から:";
-        document.getElementsByName('vuodesta')[0].placeholder = " 年 (4 dig)";
-        document.getElementById("9").innerHTML = "年まで:";
-        document.getElementsByName('vuoteen')[0].placeholder = " 年 (4 dig)";
-        document.getElementById("10").value = "送信";
+        document.getElementById("8").innerHTML = "出版年:";
+        document.getElementsByName('vuosi')[0].placeholder = " 年 (4 dig)";
+        document.getElementById("9").value = "送信";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "JPN");
         let x = localStorage.getItem("abbreviation");
@@ -98,6 +100,9 @@ function language() {
         document.getElementById("ii").innerHTML = "Поиск выдач";
         document.getElementById("iii").innerHTML = "Выдачи";
         document.getElementById("iv").innerHTML = "Фонд";
+        document.getElementById("v").innerHTML = "Тема 1";
+        document.getElementById("vi").innerHTML = "Тема 2";
+        document.getElementById("vii").innerHTML = "Тема 3";
         document.getElementById("1").innerHTML = "Поиск книги";
         document.getElementById("2").innerHTML = "Найти книгу";
         document.getElementById("3").innerHTML = "Название:";
@@ -108,11 +113,9 @@ function language() {
         document.getElementById("6").innerHTML = "Язык:";
         document.getElementsByName('kieli')[0].placeholder = " Язык";
         document.getElementById("7").innerHTML = "ISBN книги:";
-        document.getElementById("8").innerHTML = "С года:";
-        document.getElementsByName('vuodesta')[0].placeholder = " Год (4 dig)";
-        document.getElementById("9").innerHTML = "По год:";
-        document.getElementsByName('vuoteen')[0].placeholder = " Год (4 dig)";
-        document.getElementById("10").value = "Отправить";
+        document.getElementById("8").innerHTML = "Год издания:";
+        document.getElementsByName('vuosi')[0].placeholder = " Год (4 dig)";
+        document.getElementById("9").value = "Отправить";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "RUS");
         let x = localStorage.getItem("abbreviation");
@@ -122,6 +125,9 @@ function language() {
         document.getElementById("ii").innerHTML = "Lainahaku";
         document.getElementById("iii").innerHTML = "Lainat";
         document.getElementById("iv").innerHTML = "Kokoelma";
+        document.getElementById("v").innerHTML = "Teema 1";
+        document.getElementById("vi").innerHTML = "Teema 2";
+        document.getElementById("vii").innerHTML = "Teema 3";
         document.getElementById("1").innerHTML = "Kirjahaku";
         document.getElementById("2").innerHTML = "Hae kirja";
         document.getElementById("3").innerHTML = "Teoksen nimi:";
@@ -132,11 +138,9 @@ function language() {
         document.getElementById("6").innerHTML = "Teoksen kieli:";
         document.getElementsByName('kieli')[0].placeholder = " Kieli";
         document.getElementById("7").innerHTML = "Teoksen ISBN:";
-        document.getElementById("8").innerHTML = "Vuodesta:";
-        document.getElementsByName('vuodesta')[0].placeholder = "  Vuosi (4 dig)";
-        document.getElementById("9").innerHTML = "Vuoteen:";
-        document.getElementsByName('vuoteen')[0].placeholder = "  Vuosi (4 dig)";
-        document.getElementById("10").value = "Lähetä";
+        document.getElementById("8").innerHTML = "Julkaisuvuosi:";
+        document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
+        document.getElementById("9").value = "Lähetä";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "FIN");
         let x = localStorage.getItem("abbreviation");
@@ -146,6 +150,9 @@ function language() {
         document.getElementById("ii").innerHTML = "Lainahaku";
         document.getElementById("iii").innerHTML = "Lainat";
         document.getElementById("iv").innerHTML = "Kokoelma";
+        document.getElementById("v").innerHTML = "Teema 1";
+        document.getElementById("vi").innerHTML = "Teema 2";
+        document.getElementById("vii").innerHTML = "Teema 3";
         document.getElementById("1").innerHTML = "Kirjahaku";
         document.getElementById("2").innerHTML = "Hae kirja";
         document.getElementById("3").innerHTML = "Teoksen nimi:";
@@ -156,11 +163,9 @@ function language() {
         document.getElementById("6").innerHTML = "Teoksen kieli:";
         document.getElementsByName('kieli')[0].placeholder = " Kieli";
         document.getElementById("7").innerHTML = "Teoksen ISBN:";
-        document.getElementById("8").innerHTML = "Vuodesta:";
-        document.getElementsByName('vuodesta')[0].placeholder = "  Vuosi (4 dig)";
-        document.getElementById("9").innerHTML = "Vuoteen:";
-        document.getElementsByName('vuoteen')[0].placeholder = "  Vuosi (4 dig)";
-        document.getElementById("10").value = "Lähetä";
+        document.getElementById("8").innerHTML = "Julkaisuvuosi:";
+        document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
+        document.getElementById("9").value = "Lähetä";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "SWE");
         let x = localStorage.getItem("abbreviation");
@@ -174,6 +179,7 @@ function new_theme() {
     theme();
 }
 
+// teeman säilyminen siirtyessä toiselle sivulle
 y = localStorage.getItem("number");
 if (y === "t1"){
     document.getElementsByName("t1")[0].selected = "true";
@@ -187,6 +193,8 @@ if (y === "t3"){
     document.getElementsByName("t3")[0].selected = "true";
     theme();
 }
+
+// teemat
 function  theme() {
     if(y === "t1"){
         document.getElementById("body_of_page").style.backgroundColor = "yellow";
@@ -198,6 +206,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "black";
         }
+        document.getElementById("hakutulos").style.color = "black";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t1");
         let y = localStorage.getItem("number");
     }
@@ -211,6 +221,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "black";
         }
+        document.getElementById("hakutulos").style.color = "black";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t2");
         let y = localStorage.getItem("number");
     }
@@ -224,6 +236,8 @@ function  theme() {
         for (i = 0; i < p_elements.length; i++) {
             p_elements[i].style.color = "white";
         }
+        document.getElementById("hakutulos").style.color = "white";//uusi
+        // teeman säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("number", "t3");
         let y = localStorage.getItem("number");
     }
@@ -233,22 +247,21 @@ function  theme() {
 function hae_kirja(){
 
     // Luodaan url
+
     let url = "http://localhost:80/Kirjasto/Server/kirja/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
-    url += "nimi="+nimi;
+    url += "nimi=" + nimi;
     let knimi = document.getElementsByName("knimi")[0].value;
     url += "&knimi=" + knimi;
     let id = document.getElementsByName("id")[0].value;
     url += "&id=" + id;
     let kieli = document.getElementsByName("kieli")[0].value;
-    url += "&kieli="+kieli;
+    url += "&kieli=" + kieli;
     let isbn = document.getElementsByName("isbn")[0].value;
-    url += "&isbn="+isbn;
-    let vuodesta = document.getElementsByName("vuodesta")[0].value;
-    url += "&vuodesta="+vuodesta;
-    let vuoteen = document.getElementsByName("vuoteen")[0].value;
-    url += "&vuoteen="+vuoteen;
+    url += "&isbn=" + isbn;
+    let vuosi = document.getElementsByName("vuosi")[0].value;
+    url += "&vuosi=" + vuosi;
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
