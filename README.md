@@ -7,6 +7,7 @@ GET
 
 http://localhost:80/Kirjasto/Server/kirja/?nimi=&knimi=&id=&kieli=&isbn=&vuosi=
 http://localhost:80/Kirjasto/Server/lainassa/?nimi=&knimi=&id=&kieli=&isbn=&vuosi=&erapaiva=
+http://localhost:80/Kirjasto/Server/lainassa/historia/
 
 Käytetään hakujen tekemiseen. Urlista tarkistetaan serverin puolella haetaanko kirjoja vai lainoja ja siitä saadaan myös hakukriteerit.
 Hakutulos palautuu json-stringinä.
