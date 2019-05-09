@@ -328,7 +328,7 @@ function  theme() {
 // Hakee vain palauttamattomat lainat
 function hae_lainat(){
 
-    let url = "http://localhost:80/Kirjasto/Server/lainassa/?";
+    let url = "http://localhost:80/Kirjasto_user/Server/lainassa/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
@@ -405,7 +405,7 @@ function hae_lainat(){
 //Funktio hakee koko lainahistorian
 function hae_lainahistoria() {
 
-    let url = "http://localhost:80/Kirjasto/Server/lainassa/historia/";
+    let url = "http://localhost:80/Kirjasto_user/Server/lainassa/historia/";
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();

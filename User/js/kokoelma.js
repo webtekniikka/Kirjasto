@@ -304,7 +304,7 @@ function lisaa_kirja(){
 //Poistetaan tietokannasta kirja id:n perusteella
 function poista_kirja(){
 
-    let url = "http://localhost:80/Kirjasto/Server/kirja/";
+    let url = "http://localhost:80/Kirjasto_user/Server/kirja/";
 
     let id = document.getElementsByName('id1')[0].value;
     url += "?id="+id;
