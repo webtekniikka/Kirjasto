@@ -283,7 +283,7 @@ function laina(){
 
     xml.onreadystatechange = function(){
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+            alert(xml.responseText);
         }
     };
     xml.open("POST", url, true);
@@ -296,7 +296,7 @@ function palauta(){
 
     // Luodaan url
 
-    let url = "http://localhost:80/Kirjasto_user/Server/laina/palauta/";
+    let url = "http://localhost:80/Kirjasto/Server/laina/palauta/";
 
 
     let id = document.getElementsByName("id1")[0].value;
@@ -307,7 +307,7 @@ function palauta(){
 
     xml.onreadystatechange = function(){
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+            alert(xml.responseText);
         }
     };
 
