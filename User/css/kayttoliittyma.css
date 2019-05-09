@@ -7,7 +7,7 @@ input[type="text"]{
 
 input[type="number"]{
     color: blue;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 input[type="submit"]{
@@ -19,7 +19,7 @@ div{
 }
 
 p{
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .nappi{
@@ -79,7 +79,38 @@ li a:hover{
 }
 
 
-/*tulokset*/
+/*hakutulokset*/
 #hakutulos{
     display: none;
 }
+
+#caption{
+    font-weight: bold;
+}
+
+table{
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+}
+
+th{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td{
+    text-align: center;
+    border-right: 1px solid;
+    border-top: 1px solid;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#book_search_table td:nth-child(7){border-right: none;}
+
+#loan_search_table td:nth-child(7){border-right: none;}
+
+
+

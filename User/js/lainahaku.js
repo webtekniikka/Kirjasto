@@ -67,6 +67,17 @@ function language() {
         document.getElementsByName('vuosi')[0].placeholder = " Year (4 dig)";
         document.getElementById("9").innerHTML = "The due date:";
         document.getElementById("10").value = "Submit";
+        document.getElementById("loanhistory_legend").innerHTML = "Search for loan history";
+        document.getElementById("11").value = "Loan history";
+        document.getElementById("loan_search_legend").innerHTML = "Results";
+        document.getElementById("caption").innerHTML = "RESULTS";
+        //document.getElementById("12").innerHTML = "ID";
+        document.getElementById("13").innerHTML = "Book's title";
+        document.getElementById("14").innerHTML = "First name";
+        document.getElementById("15").innerHTML = "Last name";
+        document.getElementById("16").innerHTML = "Date";
+        document.getElementById("17").innerHTML = "The due date";
+        document.getElementById("18").innerHTML = "Returned";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "ENG");
         //let x = localStorage.getItem("abbreviation");
@@ -93,6 +104,17 @@ function language() {
         document.getElementsByName('vuosi')[0].placeholder = " 年 (4 dig)";
         document.getElementById("9").innerHTML = "返す日:";
         document.getElementById("10").value = "送信";
+        document.getElementById("loanhistory_legend").innerHTML = "貸出記を探す";
+        document.getElementById("11").value = "貸出記";
+        document.getElementById("loan_search_legend").innerHTML = "結果";
+        document.getElementById("caption").innerHTML = "結果";
+        //document.getElementById("12").innerHTML = "ID";
+        document.getElementById("13").innerHTML = "書籍名";
+        document.getElementById("14").innerHTML = "名前";
+        document.getElementById("15").innerHTML = "苗字";
+        document.getElementById("16").innerHTML = "年月日";
+        document.getElementById("17").innerHTML = "返す日";
+        document.getElementById("18").innerHTML = "返された";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "JPN");
         //let x = localStorage.getItem("abbreviation");
@@ -119,6 +141,17 @@ function language() {
         document.getElementsByName('vuosi')[0].placeholder = " Год (4 dig)";
         document.getElementById("9").innerHTML = "Выдано до:";
         document.getElementById("10").value = "Отправить";
+        document.getElementById("loanhistory_legend").innerHTML = "Поиск истории выдач";
+        document.getElementById("11").value = "История выдач";
+        document.getElementById("loan_search_legend").innerHTML = "Результаты поиска";
+        document.getElementById("caption").innerHTML = "РЕЗУЛЬТАТЫ ПОИСКА";
+        //document.getElementById("12").innerHTML = "ID";
+        document.getElementById("13").innerHTML = "Название";
+        document.getElementById("14").innerHTML = "Имя";
+        document.getElementById("15").innerHTML = "Фамилия ";
+        document.getElementById("16").innerHTML = "Дата";
+        document.getElementById("17").innerHTML = "Выдано до";
+        document.getElementById("18").innerHTML = "Возвращено";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "RUS");
         //let x = localStorage.getItem("abbreviation");
@@ -145,6 +178,17 @@ function language() {
         document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
         document.getElementById("9").innerHTML = "Eräpäivä:";
         document.getElementById("10").value = "Lähetä";
+        document.getElementById("loanhistory_legend").innerHTML = "Hae lainahistoria";
+        document.getElementById("11").value = "Lainahistoria";
+        document.getElementById("loan_search_legend").innerHTML = "Hakutulokset";
+        document.getElementById("caption").innerHTML = "HAKUTULOKSET";
+        //document.getElementById("12").innerHTML = "ID";
+        document.getElementById("13").innerHTML = "Teoksen nimi";
+        document.getElementById("14").innerHTML = "Etunimi";
+        document.getElementById("15").innerHTML = "Sukunimi";
+        document.getElementById("16").innerHTML = "Päivämäärä";
+        document.getElementById("17").innerHTML = "Eräpäivä";
+        document.getElementById("18").innerHTML = "Palautettu";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "FIN");
         //let x = localStorage.getItem("abbreviation");
@@ -171,6 +215,17 @@ function language() {
         document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
         document.getElementById("9").innerHTML = "Eräpäivä:";
         document.getElementById("10").value = "Lähetä";
+        document.getElementById("loanhistory_legend").innerHTML = "Hae lainahistoria";
+        document.getElementById("11").value = "Lainahistoria";
+        document.getElementById("loan_search_legend").innerHTML = "Hakutulokset";
+        document.getElementById("caption").innerHTML = "HAKUTULOKSET";
+        //document.getElementById("12").innerHTML = "ID";
+        document.getElementById("13").innerHTML = "Teoksen nimi";
+        document.getElementById("14").innerHTML = "Etunimi";
+        document.getElementById("15").innerHTML = "Sukunimi";
+        document.getElementById("16").innerHTML = "Päivämäärä";
+        document.getElementById("17").innerHTML = "Eräpäivä";
+        document.getElementById("18").innerHTML = "Palautettu";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "SWE");
         //let x = localStorage.getItem("abbreviation");
@@ -204,7 +259,14 @@ function  theme() {
         document.getElementById("body_of_page").style.backgroundColor = "yellow";
         document.getElementsByTagName("ul")[0].style.backgroundColor = "#ff8000";
         document.getElementsByTagName("h1")[0].style.color = "black";
-        document.getElementsByTagName("legend")[0].style.color = "black";
+        let legend_elements = document.getElementsByTagName("legend");
+        let j;
+        for (j = 0; j < legend_elements.length; j++) {
+            legend_elements[j].style.color = "black";
+        }
+        //document.getElementsByTagName("legend")[0].style.color = "black";
+        //document.getElementsByTagName("legend")[1].style.color = "black";
+        //document.getElementsByTagName("legend")[2].style.color = "black";
         let p_elements = document.getElementsByTagName("p");
         let i;
         for (i = 0; i < p_elements.length; i++) {
@@ -219,7 +281,14 @@ function  theme() {
         document.getElementById("body_of_page").style.backgroundColor = "white";
         document.getElementsByTagName("ul")[0].style.backgroundColor = "#d3d3d3";
         document.getElementsByTagName("h1")[0].style.color = "black";
-        document.getElementsByTagName("legend")[0].style.color = "black";
+        let legend_elements = document.getElementsByTagName("legend");
+        let j;
+        for (j = 0; j < legend_elements.length; j++) {
+            legend_elements[j].style.color = "black";
+        }
+        //document.getElementsByTagName("legend")[0].style.color = "black";
+        //document.getElementsByTagName("legend")[1].style.color = "black";
+        //document.getElementsByTagName("legend")[2].style.color = "black";
         let p_elements = document.getElementsByTagName("p");
         let i;
         for (i = 0; i < p_elements.length; i++) {
@@ -234,7 +303,14 @@ function  theme() {
         document.getElementById("body_of_page").style.backgroundColor = "black";
         document.getElementsByTagName("ul")[0].style.backgroundColor = "#404040";
         document.getElementsByTagName("h1")[0].style.color = "white";
-        document.getElementsByTagName("legend")[0].style.color = "white";
+        let legend_elements = document.getElementsByTagName("legend");
+        let j;
+        for (j = 0; j < legend_elements.length; j++) {
+            legend_elements[j].style.color = "white";
+        }
+        //document.getElementsByTagName("legend")[0].style.color = "white";
+        //document.getElementsByTagName("legend")[1].style.color = "white";
+        //document.getElementsByTagName("legend")[2].style.color = "white";
         let p_elements = document.getElementsByTagName("p");
         let i;
         for (i = 0; i < p_elements.length; i++) {
@@ -252,7 +328,7 @@ function  theme() {
 // Hakee vain palauttamattomat lainat
 function hae_lainat(){
 
-    let url = "http://localhost:80/Kirjasto/Server/lainassa/";
+    let url = "http://localhost:80/Kirjasto/Server/lainassa/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
@@ -266,9 +342,10 @@ function hae_lainat(){
     url += "&isbn=" + isbn;
     let vuosi = document.getElementsByName("vuosi")[0].value;
     url += "&vuosi=" + vuosi;
-    let erapaiva = document.getElementsByName("erapaiva");
+    let erapaiva = document.getElementsByName("erapaiva")[0].value;
     url += "&erapaiva=" + erapaiva;
 
+    console.log(erapaiva);
     console.log(url);
 
     // tehdään XMLrequest ja lähetetään se
