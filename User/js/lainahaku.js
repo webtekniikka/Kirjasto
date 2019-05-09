@@ -324,13 +324,12 @@ function  theme() {
 }
 
 // HAUT
-function hae_laina(){
 
-    // Luodaan url
+// Hakee vain palauttamattomat lainat
+function hae_lainat(){
 
+    let url = "http://localhost:80/Kirjasto/Server/lainassa/";
 
-    let url = "http://localhost:80/Kirjasto_user/Server/lainat/";
-/*
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
     let knimi = document.getElementsByName("knimi")[0].value;
@@ -343,22 +342,119 @@ function hae_laina(){
     url += "&isbn=" + isbn;
     let vuosi = document.getElementsByName("vuosi")[0].value;
     url += "&vuosi=" + vuosi;
-    let erapaiva = document.getElementsByName("erapaiva")[0].value;
+    let erapaiva = document.getElementsByName("erapaiva");
     url += "&erapaiva=" + erapaiva;
 
-
-*/
-
-
+    console.log(url);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
 
-    xml.onreadystatechange = function(){
+    xml.onreadystatechange = function () {
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+            let vastaus = xml.responseText;
+            console.log(vastaus);
+            let json = JSON.parse(vastaus);
+
+            //Tyhjennetään taulu mahdollisista vanhoista hakutuloksista
+            let taulu = document.getElementsByTagName("TBODY")[0];
+            while (taulu.firstChild) {
+                taulu.removeChild(taulu.firstChild);
+            }
+
+            if (json.length < 1) { //Jos haku ei tuota tulosta viedään tauluun tyhjä rivi
+                let rivi = document.createElement("tr");
+                for (let i = 0; i < 7; i++) {
+                    let solu = document.createElement("td");
+                    solu.innerHTML = " - ";
+                    rivi.appendChild(solu);
+                }
+                taulu.appendChild(rivi);
+            } else { //Täytetään taulu hakutuloksilla
+                for (let i = 0; i < json.length; i++) {
+                    let tiedot = [
+                        json[i].Kirja_Id,
+                        json[i].Nimi,
+                        json[i].Lainaaja_etunimi,
+                        json[i].Lainaajan_sukunimi,
+                        json[i].Lainaus_pvm,
+                        json[i].Viimeinen_pvm,
+                        json[i].Palautus_pvm
+                    ];
+
+                    let rivi = document.createElement("tr");
+                    for (let j = 0; j < tiedot.length; j++) {
+                        let solu = document.createElement("td");
+                        solu.innerHTML = tiedot[j];
+                        rivi.appendChild(solu);
+                    }
+
+                    document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+                }
+            }
         }
     };
+    document.getElementById("hakutulos").style.display = 'block'; //Muutetaan taulukko näkyväksi
+
+    xml.open("GET", url, true);
+    xml.send();
+
+}
+
+//Funktio hakee koko lainahistorian
+function hae_lainahistoria() {
+
+    let url = "http://localhost:80/Kirjasto/Server/lainassa/historia/";
+
+    // tehdään XMLrequest ja lähetetään se
+    let xml = new XMLHttpRequest();
+
+    xml.onreadystatechange = function () {
+        if (xml.readyState === 4 && xml.status === 200) {
+            let vastaus = xml.responseText;
+            let json = JSON.parse(vastaus);
+
+            let taulu = document.getElementsByTagName("TBODY")[0];
+            while (taulu.firstChild) {
+                taulu.removeChild(taulu.firstChild);
+            }
+
+            if (json.length < 1) {
+                let rivi = document.createElement("tr");
+
+                for (let i = 0; i < 7; i++) {
+                    let solu = document.createElement("td");
+                    solu.innerHTML = " - ";
+                    rivi.appendChild(solu);
+                }
+                taulu.appendChild(rivi);
+
+            } else {
+                for (let i = 0; i < json.length; i++) {
+                    let tiedot = [
+                        json[i].Kirja_Id,
+                        json[i].Nimi,
+                        json[i].Lainaaja_etunimi,
+                        json[i].Lainaajan_sukunimi,
+                        json[i].Lainaus_pvm,
+                        json[i].Viimeinen_pvm,
+                        json[i].Palautus_pvm
+                    ];
+
+                    let rivi = document.createElement("tr");
+                    for (let j = 0; j < tiedot.length; j++) {
+                        let solu = document.createElement("td");
+                        solu.innerHTML = tiedot[j];
+                        rivi.appendChild(solu);
+                    }
+
+                    document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+                }
+            }
+        }
+    };
+    document.getElementById("hakutulos").style.display = 'block';
+
     xml.open("GET", url, true);
     xml.send();
 
