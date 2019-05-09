@@ -296,7 +296,7 @@ function hae_kirja(){
 
     // Luodaan ur
 
-    let url = "http://localhost:80/Kirjasto/Server/kirja/?";
+    let url = "http://localhost:80/Kirjasto_user/Server/kirja/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
