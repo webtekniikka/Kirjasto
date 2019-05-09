@@ -250,18 +250,46 @@ function  theme() {
 // HAUT
 function hae_lainat(){
 
-    // Luodaan url
-
     let url = "http://localhost:80/Kirjasto/Server/lainassa/";
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
 
-    xml.onreadystatechange = function(){
+    xml.onreadystatechange = function () {
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+            let vastaus = xml.responseText;
+            console.log(vastaus);
+            let json = JSON.parse(vastaus);
+
+            for (let i = 0; i < json.length; i++) {
+                let tiedot = [
+                    json[i].Kirja_Id,
+                    json[i].Nimi,
+                    json[i].Lainaaja_etunimi,
+                    json[i].Lainaajan_sukunimi,
+                    json[i].Lainaus_pvm,
+                    json[i].Viimeinen_pvm,
+                    json[i].Palautus_pvm
+                ];
+
+                console.log(tiedot);
+
+
+                //Luodaan taulukon rivi
+
+                let rivi = document.createElement("tr");
+                for (let j = 0; j < tiedot.length; j++) {
+                    let solu = document.createElement("td");
+                    solu.innerHTML = tiedot[j];
+                    rivi.appendChild(solu);
+                }
+
+                document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+            }
         }
     };
+    document.getElementById("hakutulos").style.display = 'block';
+
     xml.open("GET", url, true);
     xml.send();
 
@@ -284,7 +312,7 @@ function hae_lainahistoria() {
                     json[i].Kirja_Id,
                     json[i].Nimi,
                     json[i].Lainaaja_etunimi,
-                    json[i].Lainaaja_sukunimi,
+                    json[i].Lainaajan_sukunimi,
                     json[i].Lainaus_pvm,
                     json[i].Viimeinen_pvm,
                     json[i].Palautus_pvm
@@ -303,11 +331,12 @@ function hae_lainahistoria() {
                 }
 
                 document.getElementsByTagName("TBODY")[0].appendChild(rivi);
-                document.getElementById("hakutulos").style.display = 'block';
             }
         }
-        xml.open("GET", url, true);
-        xml.send();
+    };
+    document.getElementById("hakutulos").style.display = 'block';
 
-    }
+    xml.open("GET", url, true);
+    xml.send();
+
 }
