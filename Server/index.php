@@ -207,11 +207,10 @@ function haeLainat($laina){
     $saatavuus = "Lainassa";
     $knimi = $laina['nimi'];
     $tekija = $laina['knimi'];
-    $kid = $laina['id'];
-    $kieli = $laina['kieli'];
-    $ISBN = $laina["isbn"];
-    $vuosi = $laina["vuosi"];
-    $pvm = $laina["erapaiva"];
+    $kid = ['id'];
+    $kieli = ['kieli'];
+    $ISBN = ["isbn"];
+    $vuosi =
 
 
 
@@ -223,28 +222,32 @@ function haeLainat($laina){
 
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("ssississ",$knimi, $tekija, $kid, $kieli, $ISBN, $vuosi, $pvm, $saatavuus);
-    $stmt->execute();
+    $boolean =$stmt->execute();
     $result = $stmt->get_result();
-    $kirjaArray = array();
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            /*     echo '<br />' . $row['Kirja_id'] . ' ';
-                 echo $row['Nimi'] . ' ';
-                 echo $row['Laina_id'] . ' ';
-                 echo $row['Lainaajan_etunimi'] . ' ';
-                 echo $row['Lainaajan_sukunimi'] . ' ';
-                 echo $row['Lainaus_pvm'] . ' ';
-                 echo $row['Palautus_pvm'] . ' ';
-                 echo $row['Viimeinen_pvm'] . ' ';
-                 echo $row['Kirja_id'] . ' ';
-            */
-            $kirjaArray[] = $row;
-            //echo '<br />'.$kirjaArray[] = json_encode($row).'<br />';
-        }
 
-    $json_lista = json_encode($kirjaArray);
-    echo $json_lista;
-    
+    /*$maare = "Lainassa";
+    $sql ="SELECT kirjat.Kirja_Id, kirjat.Nimi, lainaukset.*
+      FROM kirjat JOIN lainaukset ON kirjat.Kirja_Id = lainaukset.Kirja_Id WHERE kirjat.Saatavuus=?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("s",$maare);
+    $boolean =$stmt->execute();
+    $result = $stmt->get_result();
+
+    $lainassaArray = array();
+    if ($boolean > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            $lainassaArray[] = $row;
+            //echo '<br />'.$lainassaArray[] = json_encode($row).'<br />';
+        }
+    } else {
+        echo '<br />'."0 results";
+    }
+    $json_lainassa = json_encode($lainassaArray);
+    echo $json_lainassa;*/
+
+    //$stmt->close();
+    //$connection->close();
 }
 
 //Luodaan laina
@@ -478,7 +481,6 @@ function getData(){
     } else if ($metodi=="GET" && $resurssi[0]=="lainassa"){
         $hakukriteerit = getLainaHakuKriteerit();
         // tähän lainahakumetodi
-        haeLainat();
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $kirja = getData();
         addKirja($kirja);
