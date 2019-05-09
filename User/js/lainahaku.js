@@ -252,7 +252,7 @@ function  theme() {
 // Hakee vain palauttamattomat lainat
 function hae_lainat(){
 
-    let url = "http://localhost:80/Kirjasto/Server/lainassa/";
+    let url = "http://localhost:80/Kirjasto/Server/lainassa/?";
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
@@ -266,9 +266,10 @@ function hae_lainat(){
     url += "&isbn=" + isbn;
     let vuosi = document.getElementsByName("vuosi")[0].value;
     url += "&vuosi=" + vuosi;
-    let erapaiva = document.getElementsByName("erapaiva");
+    let erapaiva = document.getElementsByName("erapaiva")[0].value;
     url += "&erapaiva=" + erapaiva;
 
+    console.log(erapaiva);
     console.log(url);
 
     // tehdään XMLrequest ja lähetetään se
