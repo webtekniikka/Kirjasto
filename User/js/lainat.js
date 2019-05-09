@@ -245,13 +245,15 @@ function  theme() {
 // luodaan uusi lainatapahtuma tietokantaan
 function laina(){
 
-    let url = "http://localhost:80/Kirjasto_user/Server/laina/luo";
+    let url = "http://localhost:80/Kirjasto/Server/laina/luo/";
 
     // haetaan luotavan lainan tiedot
     let id = document.getElementsByName("id")[0].value;
     let etunimi = document.getElementsByName("etunimi")[0].value;
     let sukunimi = document.getElementsByName("sukunimi")[0].value;
     let erapaiva = document.getElementsByName("erapaiva")[0].value;
+
+    console.log(erapaiva);
 
     // luodaan päivämäärä
     let paiva = new Date();
