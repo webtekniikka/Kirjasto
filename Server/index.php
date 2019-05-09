@@ -191,7 +191,7 @@ function addKirja($data){
 
 
     //hakee vain lainassa olevat lainat;
-function haeLainat(){
+function haeLainat($laina){
     $servername = "localhost";
     $username = "ryhma4";
     $password = "passu";
@@ -204,29 +204,47 @@ function haeLainat(){
         die("Connection failed: " . $connection->connect_error);
     }
 
-    $maare = "Lainassa";
-    $sql ="SELECT kirjat.Kirja_Id, kirjat.Nimi, lainaukset.*
-      FROM kirjat JOIN lainaukset ON kirjat.Kirja_Id = lainaukset.Kirja_Id WHERE kirjat.Saatavuus=?";
+    $saatavuus = "Lainassa";
+    $knimi = $laina['nimi'];
+    $tekija = $laina['knimi'];
+    $kid = $laina['id'];
+    $kieli = $laina['kieli'];
+    $ISBN = $laina["isbn"];
+    $vuosi = $laina["vuosi"];
+    $pvm = $laina["erapaiva"];
+
+
+
+    $sql = "SELECT kirjat.Kirja_Id, kirjat.Nimi, lainaukset.*
+    FROM kirjat JOIN lainaukset ON kirjat.Kirja_Id = lainaukset.Kirja_Id
+    WHERE kirjat.Nimi=? or kirjat.Kirjailija=? or kirjat.Kirja_id=? or
+    kirjat.Kieli=? or kirjat.ISBN=? or kirjat.Julkaisuvuosi=? or lainaukset.Viimeinen_pvm=?
+    and kirjat.Saatavuus=?";
+
     $stmt = $connection->prepare($sql);
-    $stmt->bind_param("s",$maare);
-    $boolean =$stmt->execute();
+    $stmt->bind_param("ssississ",$knimi, $tekija, $kid, $kieli, $ISBN, $vuosi, $pvm, $saatavuus);
+    $stmt->execute();
     $result = $stmt->get_result();
-
-    $lainassaArray = array();
-    if ($boolean > 0) {
+    $kirjaArray = array();
         // output data of each row
-        while($row = $result->fetch_assoc()) {
-            $lainassaArray[] = $row;
-            //echo '<br />'.$lainassaArray[] = json_encode($row).'<br />';
+        while ($row = $result->fetch_assoc()) {
+            /*     echo '<br />' . $row['Kirja_id'] . ' ';
+                 echo $row['Nimi'] . ' ';
+                 echo $row['Laina_id'] . ' ';
+                 echo $row['Lainaajan_etunimi'] . ' ';
+                 echo $row['Lainaajan_sukunimi'] . ' ';
+                 echo $row['Lainaus_pvm'] . ' ';
+                 echo $row['Palautus_pvm'] . ' ';
+                 echo $row['Viimeinen_pvm'] . ' ';
+                 echo $row['Kirja_id'] . ' ';
+            */
+            $kirjaArray[] = $row;
+            //echo '<br />'.$kirjaArray[] = json_encode($row).'<br />';
         }
-    } else {
-        echo '<br />'."0 results";
-    }
-    $json_lainassa = json_encode($lainassaArray);
-    echo $json_lainassa;
 
-    $stmt->close();
-    $connection->close();
+    $json_lista = json_encode($kirjaArray);
+    echo $json_lista;
+    
 }
 
 //Luodaan laina
@@ -253,13 +271,6 @@ function addLaina($laina){
     $ppvm = "Lainassa";
     $epvm = $laina['erapaiva'];
     $saatavuus = "Lainassa";
-    //$kid = 1;
-    //$enimi = "Jorma";
-    //$snimi = "Koriseva";
-    //$lpvm = "2019-05-22";
-    //$ppvm = "Lainassa";
-    //$epvm = "2019-05-30";
-
 
 
     $tarkastus = "SELECT Saatavuus FROM Kirjat WHERE Kirja_Id=? AND Saatavuus=?";
@@ -467,6 +478,7 @@ function getData(){
     } else if ($metodi=="GET" && $resurssi[0]=="lainassa"){
         $hakukriteerit = getLainaHakuKriteerit();
         // tähän lainahakumetodi
+        haeLainat();
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $kirja = getData();
         addKirja($kirja);
