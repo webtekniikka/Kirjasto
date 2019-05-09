@@ -248,9 +248,28 @@ function  theme() {
 }
 
 // HAUT
+
+// Hakee vain palauttamattomat lainat
 function hae_lainat(){
 
     let url = "http://localhost:80/Kirjasto/Server/lainassa/";
+
+    let nimi = document.getElementsByName("nimi")[0].value;
+    url += "nimi=" + nimi;
+    let knimi = document.getElementsByName("knimi")[0].value;
+    url += "&knimi=" + knimi;
+    let id = document.getElementsByName("id")[0].value;
+    url += "&id=" + id;
+    let kieli = document.getElementsByName("kieli")[0].value;
+    url += "&kieli=" + kieli;
+    let isbn = document.getElementsByName("isbn")[0].value;
+    url += "&isbn=" + isbn;
+    let vuosi = document.getElementsByName("vuosi")[0].value;
+    url += "&vuosi=" + vuosi;
+    let erapaiva = document.getElementsByName("erapaiva");
+    url += "&erapaiva=" + erapaiva;
+
+    console.log(url);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -261,23 +280,21 @@ function hae_lainat(){
             console.log(vastaus);
             let json = JSON.parse(vastaus);
 
+            //Tyhjennetään taulu mahdollisista vanhoista hakutuloksista
             let taulu = document.getElementsByTagName("TBODY")[0];
             while (taulu.firstChild) {
                 taulu.removeChild(taulu.firstChild);
             }
 
-
-            if (json.length < 1) {
+            if (json.length < 1) { //Jos haku ei tuota tulosta viedään tauluun tyhjä rivi
                 let rivi = document.createElement("tr");
-
                 for (let i = 0; i < 7; i++) {
                     let solu = document.createElement("td");
                     solu.innerHTML = " - ";
                     rivi.appendChild(solu);
                 }
                 taulu.appendChild(rivi);
-
-            } else {
+            } else { //Täytetään taulu hakutuloksilla
                 for (let i = 0; i < json.length; i++) {
                     let tiedot = [
                         json[i].Kirja_Id,
@@ -288,11 +305,6 @@ function hae_lainat(){
                         json[i].Viimeinen_pvm,
                         json[i].Palautus_pvm
                     ];
-
-                    console.log(tiedot);
-
-
-                    //Luodaan taulukon rivi
 
                     let rivi = document.createElement("tr");
                     for (let j = 0; j < tiedot.length; j++) {
@@ -306,13 +318,14 @@ function hae_lainat(){
             }
         }
     };
-    document.getElementById("hakutulos").style.display = 'block';
+    document.getElementById("hakutulos").style.display = 'block'; //Muutetaan taulukko näkyväksi
 
     xml.open("GET", url, true);
     xml.send();
 
 }
 
+//Funktio hakee koko lainahistorian
 function hae_lainahistoria() {
 
     let url = "http://localhost:80/Kirjasto/Server/lainassa/historia/";
@@ -330,7 +343,6 @@ function hae_lainahistoria() {
                 taulu.removeChild(taulu.firstChild);
             }
 
-
             if (json.length < 1) {
                 let rivi = document.createElement("tr");
 
@@ -352,11 +364,6 @@ function hae_lainahistoria() {
                         json[i].Viimeinen_pvm,
                         json[i].Palautus_pvm
                     ];
-
-                    console.log(tiedot);
-
-
-                    //Luodaan taulukon rivi
 
                     let rivi = document.createElement("tr");
                     for (let j = 0; j < tiedot.length; j++) {

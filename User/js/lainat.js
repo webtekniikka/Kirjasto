@@ -240,14 +240,12 @@ function  theme() {
     }
 }
 
-// HAUT
+// Funktiot
+
+// luodaan uusi lainatapahtuma tietokantaan
 function laina(){
 
-    // Luodaan url
-
-
     let url = "http://localhost:80/Kirjasto/Server/laina/luo";
-
 
     // haetaan luotavan lainan tiedot
     let id = document.getElementsByName("id")[0].value;
@@ -255,6 +253,7 @@ function laina(){
     let sukunimi = document.getElementsByName("sukunimi")[0].value;
     let erapaiva = document.getElementsByName("erapaiva")[0].value;
 
+    // luodaan päivämäärä
     let paiva = new Date();
     let dd = paiva.getDate();
     let mm = paiva.getMonth()+1;
@@ -266,13 +265,11 @@ function laina(){
     let paivamaara = yyyy+"-"+mm+"-"+dd;
 
     let laina = {
-
         "id" : id,
         "etunimi" : etunimi,
         "sukunimi" : sukunimi,
         "paivamaara" : paivamaara,
         "erapaiva" : erapaiva
-
     };
 
     let data = JSON.stringify(laina);
@@ -292,15 +289,17 @@ function laina(){
 
 }
 
+// Palautetaan kirja
 function palauta(){
 
     // Luodaan url
 
     let url = "http://localhost:80/Kirjasto/Server/laina/palauta/";
 
-
     let id = document.getElementsByName("id1")[0].value;
-
+    let string = {"id" : id};
+    let data = JSON.stringify(string);
+    console.log(data);
 
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
@@ -314,6 +313,5 @@ function palauta(){
     xml.open("PUT", url, true);
 
     xml.setRequestHeader("Content-Type", "application/json");
-    xml.send(id);
-
+    xml.send(data);
 }
