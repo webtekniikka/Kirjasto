@@ -246,11 +246,9 @@ function  theme() {
 // HAUT
 function hae_kirja(){
 
-    // Luodaan url
-
+    // Luodaan ur
 
     let url = "http://localhost:80/Kirjasto/Server/kirja/?";
-
 
     let nimi = document.getElementsByName("nimi")[0].value;
     url += "nimi=" + nimi;
@@ -265,6 +263,8 @@ function hae_kirja(){
     let vuosi = document.getElementsByName("vuosi")[0].value;
     url += "&vuosi=" + vuosi;
 
+    console.log(url);
+
     // tehdään XMLrequest ja lähetetään se
     let xml = new XMLHttpRequest();
 
@@ -273,13 +273,13 @@ function hae_kirja(){
             let vastaus = xml.responseText;
             let json = JSON.parse(vastaus);
 
+            // Tyhjennetään taulu mahdollisista vanhoista hakutuloksista
             let taulu = document.getElementsByTagName("TBODY")[0];
             while (taulu.firstChild) {
                 taulu.removeChild(taulu.firstChild);
             }
-            if (json.length<1){
+            if (json.length<1){ //Jos haku ei tuota tulosta viedään tauluun tyhjä rivi
                 let rivi = document.createElement("tr");
-
                 for (let i = 0;i < 7;i++){
                     let solu = document.createElement("td");
                     solu.innerHTML = " - ";
@@ -287,7 +287,7 @@ function hae_kirja(){
                 }
                 taulu.appendChild(rivi);
 
-            } else {
+            } else { //Täytetään taulu hakutuloksilla
                 for (let i = 0; i < json.length; i++) {
                     let tiedot = [
                         json[i].Kirja_Id,
@@ -301,25 +301,18 @@ function hae_kirja(){
 
                     console.log(tiedot);
 
-
-                    //Luodaan taulukon rivi
-
                     let rivi = document.createElement("tr");
                     for (let j = 0; j < tiedot.length; j++) {
                         let solu = document.createElement("td");
                         solu.innerHTML = tiedot[j];
                         rivi.appendChild(solu);
                     }
-
                     taulu.appendChild(rivi);
-
                 }
             }
-                document.getElementById("hakutulos").style.display = 'block';
-
+                document.getElementById("hakutulos").style.display = 'block'; //Muutetaan taulu näkyväksi
             }
     };
     xml.open("GET", url, true);
     xml.send();
-
 }

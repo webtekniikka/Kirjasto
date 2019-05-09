@@ -215,8 +215,6 @@ function haeLainat(){
     $connection->close();
 }
 
-function palautaKirja(){
-
 //Luodaan laina
 
 function addLaina($laina){
@@ -312,7 +310,7 @@ function addLaina($laina){
 //      Apumetodit
 //
 
-// Selvitetään mitä halutaan tehdä
+// Selvitetään toiminnan kohde
 function getResurssi(){
     $resurssi_string =$_SERVER['REQUEST_URI'];
     if (strstr($resurssi_string, '?')) {
@@ -326,7 +324,7 @@ function getResurssi(){
     return $resurssi;
 }
 
-// Haetaan hakukriteerit
+// Haetaan kirjojen hakukriteerit
 function getKirjaHakuKriteerit(){
     $nimi = $_GET["nimi"];
     $knimi = $_GET["knimi"];
@@ -343,6 +341,29 @@ function getKirjaHakuKriteerit(){
         $hakukriteerit['kieli'] = $kieli;
         $hakukriteerit['isbn'] = $isbn;
         $hakukriteerit['vuosi'] = $vuosi;
+
+    return $hakukriteerit;
+}
+
+// Haetaan lainojen hakukriteerit
+function getLainaHakuKriteerit(){
+    $nimi = $_GET["nimi"];
+    $knimi = $_GET["knimi"];
+    $id = $_GET["id"];
+    $kieli = $_GET["kieli"];
+    $isbn = $_GET["isbn"];
+    $vuosi = $_GET["vuosi"];
+    $erapaiva = $_GET["erapaiva"];
+
+    $hakukriteerit = array();
+
+    $hakukriteerit['nimi'] = $nimi;
+    $hakukriteerit['knimi'] = $knimi;
+    $hakukriteerit['id'] = $id;
+    $hakukriteerit['kieli'] = $kieli;
+    $hakukriteerit['isbn'] = $isbn;
+    $hakukriteerit['vuosi'] = $vuosi;
+    $hakukriteerit['erapaiva'] = $erapaiva;
 
     return $hakukriteerit;
 }
@@ -367,7 +388,7 @@ function getData(){
 }
 
 //
-//      Pää Metodit
+//      Main
 //
     $metodi = getMetodi();
     $resurssi = getResurssi();
@@ -378,18 +399,14 @@ function getData(){
     } else if ($metodi=="GET" && $resurssi[0]=="lainassa" && $resurssi[1]=="historia"){
         haeKaikkilainat();
     } else if ($metodi=="GET" && $resurssi[0]=="lainassa"){
-        haeLainat();
+        $hakukriteerit = getLainaHakuKriteerit();
+        // tähän lainahakumetodi
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $kirja = getData();
         addKirja($kirja);
     } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
-        echo "mainissa";
         $laina = getData();
-
         addLaina($laina);
-        //$lainaecho = json_encode($laina);
-        //echo $lainaecho;
-
     } else if ($metodi=="PUT" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
         $id = getData();
         palautaKirja($id);
