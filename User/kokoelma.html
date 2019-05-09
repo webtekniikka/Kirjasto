@@ -8,7 +8,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>-->
 </head>
 
 <body id="body_of_page">
@@ -45,34 +44,34 @@
 
 <h1 id="1">Kokoelma</h1>
 
-<!-- Lomake -->
+<!-- Lomakkeet -->
 <form lang="fi" action="">
     <div>
         <fieldset>
             <legend id="2">Lisää kirja</legend>
             <div>
-                <p id="3">Teoksen nimi:</p> <input type="text" name="nimi" placeholder=" Teoksen nimi"/>
+                <p id="3">Teoksen nimi:</p> <label><input type="text" name="nimi" placeholder=" Teoksen nimi"/></label>
             </div>
             <div>
-                <p id="4">Kirjailijan nimi:</p> <input type="text" name="knimi" placeholder=" Kirjailijan nimi"/>
+                <p id="4">Kirjailijan nimi:</p> <label><input type="text" name="knimi" placeholder=" Kirjailijan nimi"/></label>
             </div>
             <div>
-                <p id="5">Teoksen ID:</p> <input type="text" name="id" placeholder=" ID (3 dig)"
+                <p id="5">Teoksen ID:</p> <label><input type="text" name="id" placeholder=" ID (3 dig)"
                                                  pattern="[0-9]{3}"
-                                                 oninvalid="this.setCustomValidity('Invalid ID id')"/>
+                                                 oninvalid="this.setCustomValidity('Invalid ID id')"/></label>
             </div>
             <div>
-                <p id="6">Teoksen kieli:</p> <input type="text" name="kieli" placeholder=" Kieli"/>
+                <p id="6">Teoksen kieli:</p> <label><input type="text" name="kieli" placeholder=" Kieli"/></label>
             </div>
             <div>
-                <p id="7">Teoksen ISBN:</p> <input type="text" name="isbn" placeholder=" ISBN (13 dig)"
+                <p id="7">Teoksen ISBN:</p> <label><input type="text" name="isbn" placeholder=" ISBN (13 dig)"
                                                    pattern="[0-9]{13}"
-                                                   oninvalid="this.setCustomValidity('Invalid ISBN')"/>
+                                                   oninvalid="this.setCustomValidity('Invalid ISBN')"/></label>
             </div>
             <div>
-                <p id="8">Julkaistu:</p> <input type="number" name="vuosi" min="1" placeholder=" Vuosi (4 dig)"
+                <p id="8">Julkaistu:</p> <label><input type="number" name="vuosi" min="1" placeholder=" Vuosi (4 dig)"
                                  pattern="[0-9]{4}"
-                                 oninvalid="this.setCustomValidity('Invalid year')"/>
+                                 oninvalid="this.setCustomValidity('Invalid year')"/></label>
             </div>
 
             <div>
@@ -87,9 +86,9 @@
         <fieldset>
             <legend id="10">Poista kirja</legend>
             <div>
-                <p id="11">Teoksen ID:</p> <input type="text" name="id1" placeholder=" ID (3 dig)"
+                <p id="11">Teoksen ID:</p> <label><input type="text" name="id1" placeholder=" ID (3 dig)"
                                    pattern="[0-9]{3}"
-                                   oninvalid="this.setCustomValidity('Invalid ID id')"/>
+                                   oninvalid="this.setCustomValidity('Invalid ID id')"/></label>
             </div>
             <div>
                 <input id="12" class="nappi" onclick="poista_kirja()" type="button" value="Lähetä"/>

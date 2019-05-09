@@ -245,7 +245,7 @@ function  theme() {
 // luodaan uusi lainatapahtuma tietokantaan
 function laina(){
 
-    let url = "http://localhost:80/Kirjasto/Server/laina/luo";
+    let url = "http://localhost:80/Kirjasto_user/Server/laina/luo";
 
     // haetaan luotavan lainan tiedot
     let id = document.getElementsByName("id")[0].value;

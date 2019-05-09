@@ -266,7 +266,7 @@ function  theme() {
 // Lisätään tietokantaan uusi kirja
 function lisaa_kirja(){
 
-    let url = "http://localhost:80/Kirjasto/Server/kirja/";
+    let url = "http://localhost:80/Kirjasto_user/Server/kirja/";
 
     let uusinimi = document.getElementsByName("nimi")[0].value;
     let uusiknimi = document.getElementsByName("knimi")[0].value;
