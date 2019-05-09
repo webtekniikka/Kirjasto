@@ -1,28 +1,13 @@
 <?php
 
 
-
-/*
-    $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Kustantaja, Julkaisuvuosi, Kirjailija, ISBN, Painos, Kieli, Saatavuus)
-    VALUES (004, 'Testi3', 'OTAVA', 2006, 'Kirjailija_o', '4ANa222', 3, 'Saksa','Kyllä')";
-
-    if ($connection->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $connection->error;
-    }
-    $connection->close();
-}
-
-*/
-
-  /*  //Tämä toimii
+    /*//Tämä toimii
     $saatavuus = "Saatavilla";
     $kid = 005;
     $nimi = "Testi";
     $jvuosi = 2008;
     $kirjailija = "kirjailija";
-    $ISBN = "ABC123ABC";
+    $ISBN = "ABC123ABC";*/
 
 function kirjaHaku($haku)
 {
@@ -31,8 +16,6 @@ function kirjaHaku($haku)
     $password = "passu";
     $dbname = "kirjasto";
 
-
-/*
 
     $connection = new mysqli($servername, $username, $password, $dbname);
 
@@ -82,8 +65,7 @@ function kirjaHaku($haku)
     $stmt->close();
     $connection->close();
 
-*/
-/*
+
 
 }
 
@@ -112,8 +94,6 @@ function addKirja($data){
     $kieli = $data['kieli'];
     $saatavuus = 'Saatavilla';
 
-    echo $kid;
-
     $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Julkaisuvuosi, Kirjailija, ISBN, Kieli, Saatavuus)
     Values (?,?,?,?,?,?,?)";
     $stmt = $connection->prepare($sql);
@@ -126,9 +106,6 @@ function addKirja($data){
     }
     $stmt->close();
     $connection->close();
-
-
-*/
 
 }
 
@@ -163,8 +140,6 @@ function addKirja($data){
         $stmt->close();
         $connection->close();
     }
-
-*/
 
 /*
 //hakee lainassa olevat, sekä lainahistorian
@@ -253,6 +228,96 @@ haeLainat();
 
 */
 
+//Luodaan laina
+
+function addLaina($laina){
+
+    $servername = "localhost";
+    $username = "ryhma4";
+    $password = "passu";
+    $dbname = "kirjasto";
+
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+
+    $kid = $laina['id'];
+    $enimi = $laina['etunimi'];
+    $snimi = $laina['sukunimi'];
+    $lpvm = $laina['paivamaara'];
+    $ppvm = "Lainassa";
+    $epvm = $laina['erapaiva'];
+    $saatavuus = "Lainassa";
+    //$kid = 1;
+    //$enimi = "Jorma";
+    //$snimi = "Koriseva";
+    //$lpvm = "2019-05-22";
+    //$ppvm = "Lainassa";
+    //$epvm = "2019-05-30";
+
+
+
+    $tarkastus = "SELECT Saatavuus FROM Kirjat WHERE Kirja_Id=? AND Saatavuus=?";
+    $stmt = $connection->prepare($tarkastus);
+    $stmt->bind_param("is", $kid, $saatavuus);
+    $stmt->execute();
+    $result= $stmt->get_result();
+    if ($result->num_rows > 0) {
+
+        //while ($row = $result->fetch_assoc()) {
+            //$tulos = $row['Saatavuus'];
+            //echo $tulos;
+        //}
+        echo "Rivi tulee";
+    }
+    else {
+        echo "Riviä ei tule";
+
+
+         $nextid = "SELECT MAX(Laina_Id) FROM lainaukset";
+         $stmt = $connection->prepare($nextid);
+         $stmt->execute();
+         $result = $stmt->get_result();
+         if ($result->num_rows > 0) {
+             while ($row = $result->fetch_assoc()) {
+                 $lid = $row['MAX(Laina_Id)'];
+             }
+         }
+         $lid += 1;
+
+
+         $sql = "INSERT INTO lainaukset (Laina_Id, Lainaaja_etunimi, Lainaajan_sukunimi, Lainaus_pvm, Palautus_pvm, Viimeinen_pvm, Kirja_Id)
+         Values (?,?,?,?,?,?,?)";
+         $stmt = $connection->prepare($sql);
+         $stmt->bind_param("isssssi", $lid, $enimi, $snimi, $lpvm, $ppvm, $epvm, $kid);
+         $boolean = $stmt->execute();
+         if ($boolean > 0) {
+             echo '<br />' . "Lisäys fine";
+         } else {
+             echo '<br />' . "Jokin meni vikaan lisäyksessä";
+         }
+
+         $update = "UPDATE kirjat SET Saatavuus=? WHERE Kirja_id=?;";
+         $stmt = $connection->prepare($update);
+         $stmt->bind_param("si", $saatavuus, $kid);
+         $boolean = $stmt->execute();
+         if ($boolean > 0) {
+             echo '<br />' . "Update fine";
+         } else {
+             echo '<br />' . "Jokin meni vikaan updatessa";
+         }
+         echo '<br />'."Pitäis olla tietokannassa";
+    }
+
+    $stmt->close();
+    $connection->close();
+
+}
+
 
 //
 //      Apumetodit
@@ -321,9 +386,11 @@ function getData(){
         $kirja = getData();
         addKirja($kirja);
     } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
+        echo "mainissa";
         $laina = getData();
-        $lainaecho = json_encode($laina);
-        echo $lainaecho;
+        addLaina($laina);
+        //$lainaecho = json_encode($laina);
+        //echo $lainaecho;
     } else if ($metodi=="PUT" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
         $id = getData();
         echo $id;
