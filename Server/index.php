@@ -176,6 +176,7 @@ function addKirja($data){
      $connection->close();
  }
 
+
     //hakee vain lainassa olevat lainat;
 function haeLainat(){
     $servername = "localhost";
@@ -299,6 +300,58 @@ function addLaina($laina){
          }
          echo '<br />'."Pitäis olla tietokannassa";
     }
+
+    $stmt->close();
+    $connection->close();
+
+}
+
+//Palautus tietokantaan
+function palautaKirja($id){
+
+    $servername = "localhost";
+    $username = "ryhma4";
+    $password = "passu";
+    $dbname = "kirjasto";
+
+    $connection = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+
+    $kid = $id['id'];
+    $pvm = date("Y-m-d");
+    $saatavuus = "Saatavilla";
+    $palautus = "Lainassa";
+
+    //Päivitetään kirja jälleen saatavksi kirjatauluun
+    $update = "UPDATE kirjat SET Saatavuus=? WHERE Kirja_id=?;";
+    $stmt = $connection->prepare($update);
+    $stmt->bind_param("si", $saatavuus, $kid);
+    $boolean = $stmt->execute();
+    if ($boolean > 0) {
+        echo '<br />' . "Update fine";
+    } else {
+        echo '<br />' . "Jokin meni vikaan updatessa";
+    }
+    echo '<br />'."Pitäis olla tietokannassa";
+
+
+    //Päivitetään kirja palautetuksi lainaustaulukkoon
+    $sql= "UPDATE lainaukset SET Palautus_pvm=? WHERE Kirja_id=? AND Palautus_pvm=?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("sis", $pvm, $kid, $palautus);
+    $boolean = $stmt->execute();
+    if ($boolean > 0) {
+        echo '<br />' . "Update fine";
+    } else {
+        echo '<br />' . "Jokin meni vikaan updatessa";
+    }
+    echo '<br />'."Pitäis olla tietokannassa";
+
 
     $stmt->close();
     $connection->close();
