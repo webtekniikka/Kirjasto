@@ -125,6 +125,19 @@ function addKirja($data){
         echo "Connected successfully";
 
         $kid = $para;
+
+        $hpoisto = "DELETE FROM lainaukset WHERE Kirja_id=?";
+        $stmt = $connection->prepare($hpoisto);
+        $stmt->bind_param("i",$kid);
+        $boolean =$stmt->execute();
+        if($boolean > 0){
+            echo '<br />'."Poisto onnistui";
+        }
+        else {
+            echo '<br />' . "Jokin meni vikaan";
+        }
+
+
         $sql= "DELETE FROM kirjat WHERE Kirja_Id=?";
         $stmt = $connection->prepare($sql);
         $stmt->bind_param("i",$kid);
