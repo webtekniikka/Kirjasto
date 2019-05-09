@@ -1,20 +1,13 @@
 <?php
 
+include 'connection.php';
+
+//kirjojen haku
+
 function kirjaHaku($haku)
 {
 
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
-
-
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $kid = $haku['id'];
     $nimi = $haku['nimi'];
@@ -24,7 +17,7 @@ function kirjaHaku($haku)
     $kieli = $haku['kieli'];
 
 
-    //Pätkä toimii tarvitsee vielä kimpassa miettii toteutusta haku ei liian sepsifoiva
+    //Haetaan tietokannasta kirjat löyhillä määrittelyillä
     $sql = "SELECT * FROM kirjat
     WHERE Kirja_Id=? or Nimi=? or Julkaisuvuosi=? or Kirjailija=? or ISBN=? or Kieli=?";
     $stmt = $connection->prepare($sql);
@@ -37,7 +30,8 @@ function kirjaHaku($haku)
     if ($boolean > 0) {
         // output data of each row
         while ($row = $result->fetch_assoc()) {
-            /*     echo '<br />' . $row['Kirja_Id'] . ' ';
+            /*   Testattu tulosteet jätetty rivien lisääminen tauluun
+                 echo '<br />' . $row['Kirja_Id'] . ' ';
                  echo $row['Nimi'] . ' ';
                  echo $row['Julkaisuvuosi'] . ' ';
                  echo $row['Kirjailija'] . ' ';
@@ -51,6 +45,7 @@ function kirjaHaku($haku)
     } else {
         echo '<br />' . "0 results";
     }
+    //muutetaan rivejä sisältä taulukko jsom muotoon ja palautetaan se
     $json_lista = json_encode($kirjaArray);
     echo $json_lista;
 
@@ -59,22 +54,12 @@ function kirjaHaku($haku)
 
 }
 
-//kirjan lisääminen toimii
+//kirjan lisääminen
 
 function addKirja($data)
 {
 
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
-
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $kid = $data['id'];
     $nimi = $data['nimi'];
@@ -83,6 +68,7 @@ function addKirja($data)
     $ISBN = $data['isbn'];
     $kieli = $data['kieli'];
     $saatavuus = 'Saatavilla';
+
 
     $sql = "INSERT INTO kirjat (Kirja_Id, Nimi, Julkaisuvuosi, Kirjailija, ISBN, Kieli, Saatavuus)
     Values (?,?,?,?,?,?,?)";
@@ -99,28 +85,21 @@ function addKirja($data)
 
 }
 
-//Kirjan poistaminen id:llä toimii
+//Kirjan poistaminen tietokannasta
 function poistaKirja($para)
 {
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
 
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $kid = $para;
 
+    //Poistetaan kirjaan liittyvät lainat
     $hpoisto = "DELETE FROM lainaukset WHERE Kirja_id=?";
     $stmt = $connection->prepare($hpoisto);
     $stmt->bind_param("i", $kid);
     $stmt->execute();
 
+    //Poistetaan kirja
     $sql = "DELETE FROM kirjat WHERE Kirja_Id=?";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("i", $kid);
@@ -135,20 +114,11 @@ function poistaKirja($para)
 }
 
 
-//hakee lainassa olevat, sekä lainahistorian
+//hakee lainassa olevat kirjat, sekä lainahistorian
 function haeKaikkilainat()
 {
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
 
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $sql = "SELECT kirjat.Kirja_Id, kirjat.Nimi, lainaukset.*
       FROM kirjat JOIN lainaukset ON kirjat.Kirja_Id = lainaukset.Kirja_Id";
@@ -170,20 +140,11 @@ function haeKaikkilainat()
 }
 
 
-//hakee vain lainassa olevat lainat;
+//hakee vain lainassa olevat kirjat löyhillä määrittelyillä;
 function haeLainat($laina)
 {
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
 
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $saatavuus = "Lainassa";
     $knimi = $laina['nimi'];
@@ -227,22 +188,12 @@ function haeLainat($laina)
 
 }
 
-//Luodaan laina
+//Luodaan laina kirjasta
 
 function addLaina($laina)
 {
 
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
-
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $kid = $laina['id'];
     $enimi = $laina['etunimi'];
@@ -252,7 +203,7 @@ function addLaina($laina)
     $epvm = $laina['erapaiva'];
     $saatavuus = "Lainassa";
 
-
+    //selvitetään ensin onko kirja jo lainassa
     $tarkastus = "SELECT Saatavuus FROM Kirjat WHERE Kirja_Id=? AND Saatavuus=?";
     $stmt = $connection->prepare($tarkastus);
     $stmt->bind_param("is", $kid, $saatavuus);
@@ -267,6 +218,7 @@ function addLaina($laina)
         echo "Kirja on jo lainassa.";
     } else {
 
+        //tehdään kirjalle oma laina id
         $nextid = "SELECT MAX(Laina_Id) FROM lainaukset";
         $stmt = $connection->prepare($nextid);
         $stmt->execute();
@@ -278,6 +230,7 @@ function addLaina($laina)
         }
         $lid += 1;
 
+        //lisätään laina tietokantaan
         $sql = "INSERT INTO lainaukset (Laina_Id, Lainaaja_etunimi, Lainaajan_sukunimi, Lainaus_pvm, Palautus_pvm, Viimeinen_pvm, Kirja_Id)
          Values (?,?,?,?,?,?,?)";
         $stmt = $connection->prepare($sql);
@@ -301,21 +254,11 @@ function addLaina($laina)
 
 }
 
-//Palautus tietokantaan
+//Kirjan palauttaminen
 function palautaKirja($id)
 {
 
-    $servername = "localhost";
-    $username = "ryhma4";
-    $password = "passu";
-    $dbname = "kirjasto";
-
-    $connection = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-    }
+    global $connection;
 
     $kid = $id['id'];
     $pvm = date("Y-m-d");
@@ -445,7 +388,6 @@ if ($metodi == "GET" && $resurssi[0] == "kirja") {
     haeKaikkilainat();
 } else if ($metodi == "GET" && $resurssi[0] == "lainassa") {
     $hakukriteerit = getLainaHakuKriteerit();
-    // tähän lainahakumetodi
     haeLainat($hakukriteerit);
 } else if ($metodi == "POST" && $resurssi[0] == "kirja") {
     $kirja = getData();
