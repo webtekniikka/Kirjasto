@@ -261,30 +261,48 @@ function hae_lainat(){
             console.log(vastaus);
             let json = JSON.parse(vastaus);
 
-            for (let i = 0; i < json.length; i++) {
-                let tiedot = [
-                    json[i].Kirja_Id,
-                    json[i].Nimi,
-                    json[i].Lainaaja_etunimi,
-                    json[i].Lainaajan_sukunimi,
-                    json[i].Lainaus_pvm,
-                    json[i].Viimeinen_pvm,
-                    json[i].Palautus_pvm
-                ];
-
-                console.log(tiedot);
+            let taulu = document.getElementsByTagName("TBODY")[0];
+            while (taulu.firstChild) {
+                taulu.removeChild(taulu.firstChild);
+            }
 
 
-                //Luodaan taulukon rivi
-
+            if (json.length < 1) {
                 let rivi = document.createElement("tr");
-                for (let j = 0; j < tiedot.length; j++) {
+
+                for (let i = 0; i < 7; i++) {
                     let solu = document.createElement("td");
-                    solu.innerHTML = tiedot[j];
+                    solu.innerHTML = " - ";
                     rivi.appendChild(solu);
                 }
+                taulu.appendChild(rivi);
 
-                document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+            } else {
+                for (let i = 0; i < json.length; i++) {
+                    let tiedot = [
+                        json[i].Kirja_Id,
+                        json[i].Nimi,
+                        json[i].Lainaaja_etunimi,
+                        json[i].Lainaajan_sukunimi,
+                        json[i].Lainaus_pvm,
+                        json[i].Viimeinen_pvm,
+                        json[i].Palautus_pvm
+                    ];
+
+                    console.log(tiedot);
+
+
+                    //Luodaan taulukon rivi
+
+                    let rivi = document.createElement("tr");
+                    for (let j = 0; j < tiedot.length; j++) {
+                        let solu = document.createElement("td");
+                        solu.innerHTML = tiedot[j];
+                        rivi.appendChild(solu);
+                    }
+
+                    document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+                }
             }
         }
     };
@@ -307,30 +325,48 @@ function hae_lainahistoria() {
             let vastaus = xml.responseText;
             let json = JSON.parse(vastaus);
 
-            for (let i = 0; i < json.length; i++) {
-                let tiedot = [
-                    json[i].Kirja_Id,
-                    json[i].Nimi,
-                    json[i].Lainaaja_etunimi,
-                    json[i].Lainaajan_sukunimi,
-                    json[i].Lainaus_pvm,
-                    json[i].Viimeinen_pvm,
-                    json[i].Palautus_pvm
-                ];
-
-                console.log(tiedot);
+            let taulu = document.getElementsByTagName("TBODY")[0];
+            while (taulu.firstChild) {
+                taulu.removeChild(taulu.firstChild);
+            }
 
 
-                //Luodaan taulukon rivi
-
+            if (json.length < 1) {
                 let rivi = document.createElement("tr");
-                for (let j = 0; j < tiedot.length; j++) {
+
+                for (let i = 0; i < 7; i++) {
                     let solu = document.createElement("td");
-                    solu.innerHTML = tiedot[j];
+                    solu.innerHTML = " - ";
                     rivi.appendChild(solu);
                 }
+                taulu.appendChild(rivi);
 
-                document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+            } else {
+                for (let i = 0; i < json.length; i++) {
+                    let tiedot = [
+                        json[i].Kirja_Id,
+                        json[i].Nimi,
+                        json[i].Lainaaja_etunimi,
+                        json[i].Lainaajan_sukunimi,
+                        json[i].Lainaus_pvm,
+                        json[i].Viimeinen_pvm,
+                        json[i].Palautus_pvm
+                    ];
+
+                    console.log(tiedot);
+
+
+                    //Luodaan taulukon rivi
+
+                    let rivi = document.createElement("tr");
+                    for (let j = 0; j < tiedot.length; j++) {
+                        let solu = document.createElement("td");
+                        solu.innerHTML = tiedot[j];
+                        rivi.appendChild(solu);
+                    }
+
+                    document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+                }
             }
         }
     };
