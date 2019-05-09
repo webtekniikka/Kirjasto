@@ -1,6 +1,7 @@
 <?php
 
 
+
     /*//Tämä toimii
     $saatavuus = "Saatavilla";
     $kid = 005;
@@ -11,6 +12,7 @@
 
 function kirjaHaku($haku)
 {
+
     $servername = "localhost";
     $username = "ryhma4";
     $password = "passu";
@@ -67,7 +69,6 @@ function kirjaHaku($haku)
 
 }
 
-
    //kirjan lisääminen toimii
 
 function addKirja($data){
@@ -106,8 +107,6 @@ function addKirja($data){
     $connection->close();
 
 }
-
-
 
    //Kirjan poistaminen id:llä toimii
     function poistaKirja($para){
@@ -153,7 +152,6 @@ function addKirja($data){
      if ($connection->connect_error) {
          die("Connection failed: " . $connection->connect_error);
      }
-     echo "Connected successfully";
 
      $sql ="SELECT kirjat.Kirja_Id, kirjat.Nimi, lainaukset.*
       FROM kirjat JOIN lainaukset ON kirjat.Kirja_Id = lainaukset.Kirja_Id";
@@ -192,7 +190,6 @@ function haeLainat(){
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
     }
-    echo "Connected successfully";
 
     $maare = "Lainassa";
     $sql ="SELECT kirjat.Kirja_Id, kirjat.Nimi, lainaukset.*
@@ -218,6 +215,7 @@ function haeLainat(){
     $stmt->close();
     $connection->close();
 }
+
 
 
 //Luodaan laina
@@ -366,6 +364,8 @@ function palautaKirja($id){
 //
 //      Apumetodit
 //
+
+// Selvitetään mitä halutaan tehdä
 function getResurssi(){
     $resurssi_string =$_SERVER['REQUEST_URI'];
     if (strstr($resurssi_string, '?')) {
@@ -379,6 +379,7 @@ function getResurssi(){
     return $resurssi;
 }
 
+// Haetaan hakukriteerit
 function getKirjaHakuKriteerit(){
     $nimi = $_GET["nimi"];
     $knimi = $_GET["knimi"];
@@ -399,45 +400,52 @@ function getKirjaHakuKriteerit(){
     return $hakukriteerit;
 }
 
+// Haetaan kirjan id
 function getID(){
     $id = $_GET['id'];
     return $id;
 }
 
+// Haetaan mitä metodia ollaan käyttämässä
 function getMetodi(){
     $metodi =$_SERVER['REQUEST_METHOD'];
     return $metodi;
 }
 
+// Haetaan clientistä lähetetty data
 function getData(){
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
     return $data;
 }
 
-
 //
 //      Pää Metodit
 //
     $metodi = getMetodi();
     $resurssi = getResurssi();
+
     if ($metodi=="GET" && $resurssi[0]=="kirja") {
-        $hakukriteerit = getKirjaHakuKriteerit();//
+        $hakukriteerit = getKirjaHakuKriteerit();
         kirjaHaku($hakukriteerit);
-    } else if ($metodi=="GET" && $resurssi[0]=="lainat"){
-        echo $resurssi[0];
+    } else if ($metodi=="GET" && $resurssi[0]=="lainassa" && $resurssi[1]=="historia"){
+        haeKaikkilainat();
+    } else if ($metodi=="GET" && $resurssi[0]=="lainassa"){
+        haeLainat();
     } else if ($metodi=="POST" && $resurssi[0]=="kirja") {
         $kirja = getData();
         addKirja($kirja);
     } else if ($metodi=="POST" && $resurssi[0]=="laina" && $resurssi[1]=="luo"){
         echo "mainissa";
         $laina = getData();
+
         addLaina($laina);
         //$lainaecho = json_encode($laina);
         //echo $lainaecho;
+
     } else if ($metodi=="PUT" && $resurssi[0]=="laina" && $resurssi[1]=="palauta"){
         $id = getData();
-        echo $id;
+        palautaKirja($id);
     } else if ($metodi=="DELETE" && $resurssi[0]=="kirja") {
         $id = getID();
         poistaKirja($id);

@@ -294,7 +294,7 @@ function lisaa_kirja(){
 
     xml.onreadystatechange = function(){
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+           alert(xml.responseText);
         }
     };
     xml.open("POST", url, true);
@@ -307,7 +307,7 @@ function poista_kirja(){
 
     // Luodaan url
 
-    let url = "http://localhost:80/Kirjasto_user/Server/kirja/";
+    let url = "http://localhost:80/Kirjasto/Server/kirja/";
 
     let id = document.getElementsByName('id1')[0].value;
 
@@ -319,7 +319,7 @@ function poista_kirja(){
 
     xml.onreadystatechange = function(){
         if (xml.readyState === 4 && xml.status === 200) {
-            document.getElementById("hakutulos").innerHTML = xml.responseText;
+            alert(xml.responseText);
         }
     };
     xml.open("DELETE", url, true);

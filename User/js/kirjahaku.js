@@ -249,7 +249,7 @@ function hae_kirja(){
     // Luodaan url
 
 
-    let url = "http://localhost:80/Kirjasto_user/Server/kirja/?";
+    let url = "http://localhost:80/Kirjasto/Server/kirja/?";
 
 
     let nimi = document.getElementsByName("nimi")[0].value;
@@ -273,35 +273,51 @@ function hae_kirja(){
             let vastaus = xml.responseText;
             let json = JSON.parse(vastaus);
 
-            for (let i=0;i<json.length;i++){
-                let tiedot = [
-                    json[i].Kirja_Id,
-                    json[i].Nimi,
-                    json[i].Kirjailija,
-                    json[i].Julkaisuvuosi,
-                    json[i].Kieli,
-                    json[i].ISBN,
-                    json[i].Saatavuus
-                ];
-
-                console.log(tiedot);
-
-
-                //Luodaan taulukon rivi
-
+            let taulu = document.getElementsByTagName("TBODY")[0];
+            while (taulu.firstChild) {
+                taulu.removeChild(taulu.firstChild);
+            }
+            if (json.length<1){
                 let rivi = document.createElement("tr");
-                for (let j=0;j<tiedot.length;j++){
+
+                for (let i = 0;i < 7;i++){
                     let solu = document.createElement("td");
-                    solu.innerHTML = tiedot[j];
+                    solu.innerHTML = " - ";
                     rivi.appendChild(solu);
                 }
+                taulu.appendChild(rivi);
 
-                document.getElementsByTagName("TBODY")[0].appendChild(rivi);
+            } else {
+                for (let i = 0; i < json.length; i++) {
+                    let tiedot = [
+                        json[i].Kirja_Id,
+                        json[i].Nimi,
+                        json[i].Kirjailija,
+                        json[i].Julkaisuvuosi,
+                        json[i].Kieli,
+                        json[i].ISBN,
+                        json[i].Saatavuus
+                    ];
+
+                    console.log(tiedot);
+
+
+                    //Luodaan taulukon rivi
+
+                    let rivi = document.createElement("tr");
+                    for (let j = 0; j < tiedot.length; j++) {
+                        let solu = document.createElement("td");
+                        solu.innerHTML = tiedot[j];
+                        rivi.appendChild(solu);
+                    }
+
+                    taulu.appendChild(rivi);
+
+                }
+            }
                 document.getElementById("hakutulos").style.display = 'block';
 
             }
-
-        }
     };
     xml.open("GET", url, true);
     xml.send();
