@@ -66,6 +66,15 @@ function language() {
         document.getElementById("8").innerHTML = "Published:";
         document.getElementsByName('vuosi')[0].placeholder = " Year (4 dig)";
         document.getElementById("9").value = "Submit";
+        document.getElementById("book_search_legend").innerHTML = "Results";
+        document.getElementById("caption").innerHTML = "RESULTS";
+        //document.getElementById("10").innerHTML = "ID";
+        document.getElementById("11").innerHTML = "Book's title";
+        document.getElementById("12").innerHTML = "Author";
+        document.getElementById("13").innerHTML = "Published";
+        document.getElementById("14").innerHTML = "Language";
+        //document.getElementById("15").innerHTML = "ISBN";
+        document.getElementById("16").innerHTML = "Availability";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "ENG");
         //let x = localStorage.getItem("abbreviation");
@@ -91,6 +100,15 @@ function language() {
         document.getElementById("8").innerHTML = "出版年:";
         document.getElementsByName('vuosi')[0].placeholder = " 年 (4 dig)";
         document.getElementById("9").value = "送信";
+        document.getElementById("book_search_legend").innerHTML = "結果";
+        document.getElementById("caption").innerHTML = "結果";
+        //document.getElementById("10").innerHTML = "ID";
+        document.getElementById("11").innerHTML = "書籍名";
+        document.getElementById("12").innerHTML = "著者名";
+        document.getElementById("13").innerHTML = "出版年";
+        document.getElementById("14").innerHTML = "言語";
+        //document.getElementById("15").innerHTML = "ISBN";
+        document.getElementById("16").innerHTML = "可用性";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "JPN");
         //let x = localStorage.getItem("abbreviation");
@@ -116,6 +134,15 @@ function language() {
         document.getElementById("8").innerHTML = "Год издания:";
         document.getElementsByName('vuosi')[0].placeholder = " Год (4 dig)";
         document.getElementById("9").value = "Отправить";
+        document.getElementById("book_search_legend").innerHTML = "Результаты поиска";
+        document.getElementById("caption").innerHTML = "РЕЗУЛЬТАТЫ ПОИСКА";
+        //document.getElementById("10").innerHTML = "ID";
+        document.getElementById("11").innerHTML = "Название";
+        document.getElementById("12").innerHTML = "Автор";
+        document.getElementById("13").innerHTML = "Год издания";
+        document.getElementById("14").innerHTML = "Язык";
+        //document.getElementById("15").innerHTML = "ISBN";
+        document.getElementById("16").innerHTML = "Наличие";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "RUS");
         //let x = localStorage.getItem("abbreviation");
@@ -141,6 +168,15 @@ function language() {
         document.getElementById("8").innerHTML = "Julkaisuvuosi:";
         document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
         document.getElementById("9").value = "Lähetä";
+        document.getElementById("book_search_legend").innerHTML = "Hakutulokset";
+        document.getElementById("caption").innerHTML = "HAKUTULOKSET";
+        //document.getElementById("10").innerHTML = "ID";
+        document.getElementById("11").innerHTML = "Teoksen nimi";
+        document.getElementById("12").innerHTML = "Kirjailija";
+        document.getElementById("13").innerHTML = "Julkaisuvuosi";
+        document.getElementById("14").innerHTML = "Kieli";
+        //document.getElementById("15").innerHTML = "ISBN";
+        document.getElementById("16").innerHTML = "Saatavuus";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "FIN");
         //let x = localStorage.getItem("abbreviation");
@@ -166,6 +202,15 @@ function language() {
         document.getElementById("8").innerHTML = "Julkaisuvuosi:";
         document.getElementsByName('vuosi')[0].placeholder = " Vuosi (4 dig)";
         document.getElementById("9").value = "Lähetä";
+        document.getElementById("book_search_legend").innerHTML = "Hakutulokset";
+        document.getElementById("caption").innerHTML = "HAKUTULOKSET";
+        //document.getElementById("10").innerHTML = "Teoksen ID";
+        document.getElementById("11").innerHTML = "Teoksen nimi";
+        document.getElementById("12").innerHTML = "Kirjailija";
+        document.getElementById("13").innerHTML = "Julkaisuvuosi";
+        document.getElementById("14").innerHTML = "Kieli";
+        //document.getElementById("15").innerHTML = "ISBN";
+        document.getElementById("16").innerHTML = "Saatavuus";
         // kielen säilyminen siirtyessä toiselle sivulle
         localStorage.setItem("abbreviation", "SWE");
         //let x = localStorage.getItem("abbreviation");
@@ -201,6 +246,7 @@ function  theme() {
         document.getElementsByTagName("ul")[0].style.backgroundColor = "#ff8000";
         document.getElementsByTagName("h1")[0].style.color = "black";
         document.getElementsByTagName("legend")[0].style.color = "black";
+        document.getElementsByTagName("legend")[1].style.color = "black";
         let p_elements = document.getElementsByTagName("p");
         let i;
         for (i = 0; i < p_elements.length; i++) {
@@ -216,6 +262,7 @@ function  theme() {
         document.getElementsByTagName("ul")[0].style.backgroundColor = "#d3d3d3";
         document.getElementsByTagName("h1")[0].style.color = "black";
         document.getElementsByTagName("legend")[0].style.color = "black";
+        document.getElementsByTagName("legend")[1].style.color = "black";
         let p_elements = document.getElementsByTagName("p");
         let i;
         for (i = 0; i < p_elements.length; i++) {
@@ -231,6 +278,7 @@ function  theme() {
         document.getElementsByTagName("ul")[0].style.backgroundColor = "#404040";
         document.getElementsByTagName("h1")[0].style.color = "white";
         document.getElementsByTagName("legend")[0].style.color = "white";
+        document.getElementsByTagName("legend")[1].style.color = "white";
         let p_elements = document.getElementsByTagName("p");
         let i;
         for (i = 0; i < p_elements.length; i++) {
