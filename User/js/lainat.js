@@ -246,7 +246,7 @@ function laina(){
     // Luodaan url
 
 
-    let url = "http://localhost:80/Kirjasto/Server/laina/luo";
+    let url = "http://localhost:80/Kirjasto_user/Server/laina/luo";
 
 
     // haetaan luotavan lainan tiedot
